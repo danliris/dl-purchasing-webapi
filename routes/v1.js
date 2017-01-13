@@ -45,9 +45,11 @@ var v1UnitPaymentQuantityCorrectionReturNoteRouter = require('../src/routers/v1/
 var v1UnitPaymentQuantityCorrectionNoteRouter = require('../src/routers/v1/unit-payment-note/unit-payment-quantity-correction-note-router');
 var v1UnitPaymentOrderByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-router'); 
 var v1UnitPaymentOrderRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-router');
+//ETL
+var v1FactPembelianRouter = require('../src/routers/v1/etl/fact-pembelian-router');
 
  module.exports = function(server) {
-    //PURCHASE REQUEST
+    // PURCHASE REQUEST
     v1PurchaseRequestPostedRouter().applyRoutes(server,                     "/v1/purchase-requests/posted");
     v1PurchaseRequestPostRouter().applyRoutes(server,                       "/v1/purchase-requests/post");
     v1PurchaseRequestByUserRouter().applyRoutes(server,                     "/v1/purchase-requests/by-user");
@@ -95,4 +97,6 @@ var v1UnitPaymentOrderRouter = require('../src/routers/v1/unit-payment-note/unit
     v1UnitPaymentQuantityCorrectionNoteRouter().applyRoutes(server,         "/v1/unit-payment-orders/corrections/quantities");
     v1UnitPaymentOrderByUserRouter().applyRoutes(server,                    "/v1/unit-payment-orders/by-user");
     v1UnitPaymentOrderRouter().applyRoutes(server,                          "/v1/unit-payment-orders");
+    //ETL
+    v1FactPembelianRouter().applyRoutes(server,                             "/v1/fact-pembelian");
  };

@@ -6,7 +6,7 @@ function test(name, path) {
 
 before("initialize server", function(done) {
     var server = require("../server");
-    server(true)
+    server()
         .then((server) => {
             const apiVersion = '1.0.0';
 

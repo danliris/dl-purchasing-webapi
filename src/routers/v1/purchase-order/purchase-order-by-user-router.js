@@ -22,9 +22,10 @@ function getRouter() {
         query.order = {
             "_updatedDate": -1
         };
-        query.filter = {
+        var filter = {
             "_createdBy": request.user.username
         };
+        Object.assign(query.filter, filter);
         query.select = [
             "unit.division.name", "unit.name", "category.name", "purchaseRequest.date", "purchaseRequest.no", "purchaseRequest.expectedDeliveryDate", "_createdBy", "purchaseOrderExternal.isPosted", "isPosted"
         ];

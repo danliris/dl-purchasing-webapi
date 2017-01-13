@@ -21,9 +21,10 @@ function getRouter() {
         query.order = {
             "_updatedDate": -1
         };
-        query.filter = {
-            "unit.name" : {$in :["PEMBELIAN A" , "PEMBELIAN C", "PEMBELIAN D", "PEMBELIAN E", "PEMBELIAN F"]}
+        var filter = {
+            "unit.name": { $in: ["PEMBELIAN A", "PEMBELIAN C", "PEMBELIAN D", "PEMBELIAN E", "PEMBELIAN F"] }
         };
+        Object.assign(query.filter, filter);
         query.select = [
             "unit.division.name", "unit.name", "category.name", "date", "no", "expectedDeliveryDate", "_createdBy", "isPosted"
         ];
@@ -84,7 +85,7 @@ function getRouter() {
         else {
             var user = request.user;
             var id = request.params.id;
-            var query = { 
+            var query = {
                 "_id": new ObjectId(id)
             };
             getManager(user)
