@@ -23,7 +23,8 @@ function getRouter() {
             manager.getDataDeliveryOrder(no, supplierId, dateFrom, dateTo, createdBy)
                 .then(docs => {
 
-                    var dateFormat = "DD MMM YYYY";
+                    var dateFormat = "DD/MM/YYYY";
+                    var dateFormat2 = "DD MMM YYYY";
                     var locale = 'id-ID';
                     var moment = require('moment');
                     moment.locale(locale);
@@ -85,7 +86,7 @@ function getRouter() {
                             "Jumlah Sisa Barang": "number",
                             "Satuan Barang": "string"
                         };
-                        response.xls(`Monitoring Surat Jalan - ${moment(new Date()).format(dateFormat)}.xlsx`, data, options);
+                        response.xls(`Monitoring Surat Jalan - ${moment(new Date()).format(dateFormat2)}.xlsx`, data, options);
 
                     }
                 })

@@ -6,7 +6,7 @@ var resultFormatter = require("../../../result-formatter");
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
 
-function getRouter(){
+function getRouter() {
     var router = new Router();
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
@@ -21,18 +21,19 @@ function getRouter(){
 
             manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo)
                 .then(docs => {
-                    var dateFormat = "DD MMM YYYY";
-                        var locale = 'id-ID';
-                        var moment = require('moment');
-                        moment.locale(locale);
-                        
-                        var data = [];
-                        var index = 0;
-                        
-                        for (var unitReceiptNote of docs) {
+                    var dateFormat = "DD/MM/YYYY";
+                    var dateFormat2 = "DD MMM YYYY";
+                    var locale = 'id-ID';
+                    var moment = require('moment');
+                    moment.locale(locale);
+
+                    var data = [];
+                    var index = 0;
+
+                    for (var unitReceiptNote of docs) {
                         for (var item of unitReceiptNote.items) {
                             var sisa = 0;
-                            
+
                             for (var poItem of item.purchaseOrder.items) {
                                 if (poItem.product._id.toString() == item.product._id.toString()) {
                                     for (var fulfillment of poItem.fulfillments) {
@@ -64,7 +65,7 @@ function getRouter(){
                             data.push(_item);
                         }
                     }
-                        
+
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, data);
                         response.send(200, result);
@@ -88,7 +89,7 @@ function getRouter(){
                         };
 
 
-                        response.xls(`Monitoring Bon Terima Unit - ${moment(new Date()).format(dateFormat)}.xlsx`, data, options);
+                        response.xls(`Monitoring Bon Terima Unit - ${moment(new Date()).format(dateFormat2)}.xlsx`, data, options);
                     }
                 })
                 .catch(e => {

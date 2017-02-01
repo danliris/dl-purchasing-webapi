@@ -23,6 +23,7 @@
   "homepage": "https://github.com/danliris/dl-purchasing-webapi#readme",
   "dependencies": {
     "assert": "^1.4.1",
+
     "dl-module": "git+https://github.com/danliris/dl-module.git",
     "json2xls": "^0.1.2",
     "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",

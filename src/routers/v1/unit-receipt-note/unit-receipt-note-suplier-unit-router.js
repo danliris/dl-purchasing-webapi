@@ -6,7 +6,7 @@ var ObjectId = require("mongodb").ObjectId;
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
 
-function getRouter(){
+function getRouter() {
     var router = new Router();
     router.get("/", passport, (request, response, next) => {
         db.get().then(db => {
@@ -14,9 +14,10 @@ function getRouter(){
                 username: 'router'
             });
 
-            var query = request.queryInfo; 
+            var query = request.queryInfo;
             var filter = {
                 "_deleted": false,
+                "isPaid": false,
                 "supplierId": new ObjectId(query.filter.supplierId),
                 "unit.divisionId": new ObjectId(query.filter.divisionId),
                 "items": {
@@ -32,7 +33,7 @@ function getRouter(){
                 }
             };
 
-            query.filter = filter; 
+            query.filter = filter;
             manager.read(query)
                 .then(docs => {
                     var result = resultFormatter.ok(apiVersion, 200, docs.data);

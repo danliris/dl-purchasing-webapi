@@ -7,7 +7,7 @@ var resultFormatter = require("../../../result-formatter");
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
 
-function getRouter(){
+function getRouter() {
     var router = new Router();
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
@@ -21,8 +21,9 @@ function getRouter(){
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var state = parseInt(request.params.state);
+            var createdBy = request.user.username;
 
-            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state)
+            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, createdBy)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
@@ -99,7 +100,7 @@ function getRouter(){
                                         "Nilai Koreksi": _correctionPriceTotal || 0,
                                         "Ket. Koreksi": _correctionRemark || "-",
                                         "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                        "Status" : PO.status ? PO.status.label : "-"
+                                        "Status": PO.status ? PO.status.label : "-"
                                     }
                                     data.push(_item);
                                 }
@@ -146,7 +147,7 @@ function getRouter(){
                                     "Nilai Koreksi": 0,
                                     "Ket. Koreksi": "-",
                                     "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                    "Status" : PO.status ? PO.status.label : "-"
+                                    "Status": PO.status ? PO.status.label : "-"
                                 }
                                 data.push(_item);
                             }

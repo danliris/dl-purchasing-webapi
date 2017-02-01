@@ -19,15 +19,17 @@ function getRouter() {
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var state = parseInt(request.params.state);
+            var createdBy = request.user.username;
 
-            manager.getDataPRMonitoring(unitId, categoryId, budgetId, PRNo, dateFrom, dateTo, state)
+            manager.getDataPRMonitoring(unitId, categoryId, budgetId, PRNo, dateFrom, dateTo, state, createdBy)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
                         response.send(200, result);
                     } else {
-                        var dateFormat = "DD MMMM YYYY";
-                        var dateFormat2 = "DD-MMMM-YYYY";
+
+                        var dateFormat = "DD/MM/YYYY";
+                        var dateFormat2 = "DD MMMM YYYY";
                         var locale = 'id-ID';
                         var moment = require('moment');
                         moment.locale(locale);
@@ -40,20 +42,20 @@ function getRouter() {
                                 var status = purchaseRequest.status ? purchaseRequest.status.label : "-";
 
                                 if (purchaseRequest.status.value === 4 || purchaseRequest.status.value === 9) {
-                                    status = `${status} (${item.deliveryOrderNos.join(", ")})`;
+                                    status = item.deliveryOrderNos.length > 0 ? `${status} (${item.deliveryOrderNos.join(", ")})` : status;
                                 }
                                 var _item = {
                                     "No": index,
                                     "Unit": `${purchaseRequest.unit.division.name} - ${purchaseRequest.unit.name}`,
                                     "Budget": purchaseRequest.budget.name,
                                     "Kategori": purchaseRequest.category.name,
-                                    "Tanggal PR": moment(new Date(purchaseRequest.date)).format(dateFormat2),
+                                    "Tanggal PR": moment(new Date(purchaseRequest.date)).format(dateFormat),
                                     "Nomor PR": purchaseRequest.no,
                                     "Kode Barang": item.product.code,
                                     "Nama Barang": item.product.name,
                                     "Jumlah": item.quantity,
                                     "Satuan": item.product.uom.unit,
-                                    "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).format(dateFormat2) : "-",
+                                    "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).format(dateFormat) : "-",
                                     "Status": status
                                 }
                                 data.push(_item);
@@ -74,7 +76,7 @@ function getRouter() {
                             "Tanggal Diminta Datang": "string",
                             "Status": "string",
                         };
-                        response.xls(`Monitoring Purchase Request - ${moment(new Date()).format(dateFormat)}.xlsx`, data, options);
+                        response.xls(`Monitoring Purchase Request - ${moment(new Date()).format(dateFormat2)}.xlsx`, data, options);
 
                     }
                 })

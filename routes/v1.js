@@ -8,6 +8,7 @@ var v1PurchaseRequestByRoleRouter = require('../src/routers/v1/purchase-request/
 var v1PurchaseRequestMonitoringAllUserRouter = require('../src/routers/v1/purchase-request/purchase-request-monitoring-all-user-router');
 // PURCHASE ORDER
 var v1PurchaseOrderSplitRouter = require('../src/routers/v1/purchase-order/purchase-order-split-router');
+var v1POMonitoringByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-by-user-router');
 var v1POMonitoringRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-router');
 var v1PurchaseOrderUnpostedRouter = require('../src/routers/v1/purchase-order/purchase-order-un-posted-router');
 var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-by-user-router');
@@ -67,6 +68,7 @@ var v1FactPembelianRouter = require('../src/routers/v1/etl/fact-pembelian-router
 
     //PURCHASE ORDER
     v1PurchaseOrderSplitRouter().applyRoutes(server,                        "/v1/purchase-orders/split");
+    v1POMonitoringByUserRouter().applyRoutes(server,                        "/v1/purchase-orders/monitoring/by-user");
     v1POMonitoringRouter().applyRoutes(server,                              "/v1/purchase-orders/monitoring");
     v1PurchaseOrderUnpostedRouter().applyRoutes(server,                     "/v1/purchase-orders/unposted");
     v1PurchaseOrderByUserRouter().applyRoutes(server,                       "/v1/purchase-orders/by-user");
