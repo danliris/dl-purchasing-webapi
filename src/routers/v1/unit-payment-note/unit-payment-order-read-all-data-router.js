@@ -21,6 +21,10 @@ function getRouter() {
         query.order = {
             "_updatedDate": -1
         };
+        var filter = {
+            "_deleted": false
+        };
+        Object.assign(query.filter, filter);
         
         getManager(user)
             .then((manager) => {

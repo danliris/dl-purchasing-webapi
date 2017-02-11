@@ -15,6 +15,7 @@ function getRouter(){
             var query = request.queryInfo;
 
             var filter = {
+                _deleted: false,
                 isPosted: false
             };
 
