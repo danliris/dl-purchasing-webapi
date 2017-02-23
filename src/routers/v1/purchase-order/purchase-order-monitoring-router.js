@@ -7,7 +7,7 @@ var resultFormatter = require("../../../result-formatter");
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
 
-function getRouter(){
+function getRouter() {
     var router = new Router();
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
@@ -82,6 +82,7 @@ function getRouter(){
                                         "No Bon Terima Unit": fulfillment.unitReceiptNoteNo ? fulfillment.unitReceiptNoteNo : "-",
                                         "Jumlah Diminta": fulfillment.unitReceiptNoteDeliveredQuantity ? fulfillment.unitReceiptNoteDeliveredQuantity : 0,
                                         "Satuan Diminta": fulfillment.unitReceiptDeliveredUom ? fulfillment.unitReceiptDeliveredUom.unit : "-",
+                                        "Tempo Pembayaran": PO.paymentDueDays + " hari",
                                         "Tanggal Invoice": fulfillment.invoiceDate ? moment(new Date(fulfillment.invoiceDate)).format(dateFormat) : "-",
                                         "No Invoice": fulfillment.invoiceNo ? fulfillment.invoiceNo : "-",
                                         "Tanggal Nota Intern": fulfillment.interNoteDate ? moment(new Date(fulfillment.interNoteDate)).format(dateFormat) : "-",
@@ -99,7 +100,7 @@ function getRouter(){
                                         "Nilai Koreksi": _correctionPriceTotal || 0,
                                         "Ket. Koreksi": _correctionRemark || "-",
                                         "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                        "Status" : PO.status ? PO.status.label : "-"
+                                        "Status": PO.status ? PO.status.label : "-"
                                     }
                                     data.push(_item);
                                 }
@@ -129,6 +130,7 @@ function getRouter(){
                                     "No Bon Terima Unit": "-",
                                     "Jumlah Diminta": 0,
                                     "Satuan Diminta": "-",
+                                    "Tempo Pembayaran": PO.paymentDueDays + " hari",
                                     "Tanggal Invoice": "-",
                                     "No Invoice": "-",
                                     "Tanggal Nota Intern": "-",
@@ -146,7 +148,7 @@ function getRouter(){
                                     "Nilai Koreksi": 0,
                                     "Ket. Koreksi": "-",
                                     "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                    "Status" : PO.status ? PO.status.label : "-"
+                                    "Status": PO.status ? PO.status.label : "-"
                                 }
                                 data.push(_item);
                             }
@@ -180,6 +182,7 @@ function getRouter(){
                             "No Bon Terima Unit": "string",
                             "Jumlah Diminta": "number",
                             "Satuan Diminta": "string",
+                            "Tempo Pembayaran": "string",
                             "Tanggal Invoice": "string",
                             "No Invoice": "string",
                             "Tanggal Nota Intern": "string",

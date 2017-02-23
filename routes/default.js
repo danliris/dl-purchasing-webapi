@@ -1,4 +1,5 @@
 // PURCHASE REQUEST
+var v1PurchaseRequestUnpostRouter = require('../src/routers/v1/purchase-request/purchase-request-unpost-router');
 var v1PurchaseRequestPostedRouter = require('../src/routers/v1/purchase-request/purchase-request-posted-router');
 var v1PurchaseRequestPostRouter = require('../src/routers/v1/purchase-request/purchase-request-post-router');
 var v1PurchaseRequestByUserRouter = require('../src/routers/v1/purchase-request/purchase-request-by-user-router');
@@ -59,6 +60,7 @@ var v1FactPembelianRouter = require('../src/routers/v1/etl/fact-pembelian-router
 
  module.exports = function(server) {
     //PURCHASE REQUEST
+    v1PurchaseRequestUnpostRouter().applyRoutes(server,                     "/purchase-requests/unpost");
     v1PurchaseRequestPostedRouter().applyRoutes(server,                     "/purchase-requests/posted");
     v1PurchaseRequestPostRouter().applyRoutes(server,                       "/purchase-requests/post");
     v1PurchaseRequestByUserRouter().applyRoutes(server,                     "/purchase-requests/by-user");
