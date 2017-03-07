@@ -28,7 +28,7 @@ function getRouter() {
         Object.assign(query.filter, filter);
 
         query.select = [
-            "no", "date", "supplier.name", "items"
+            "no", "supplierDoDate", "supplier.name", "items.purchaseOrderExternal.no"
         ];
 
         getManager(user)
