@@ -13,18 +13,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danliris/dl-purchasing-webapi.git"
+    "url": "git+https://github.com/ambassador-garmindo/dl-purchasing-webapi.git"
   },
   "author": "Moonlay",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/danliris/dl-purchasing-webapi/issues"
+    "url": "https://github.com/ambassador-garmindo/dl-purchasing-webapi/issues"
   },
-  "homepage": "https://github.com/danliris/dl-purchasing-webapi#readme",
+  "homepage": "https://github.com/ambassador-garmindo/dl-purchasing-webapi#readme",
   "dependencies": {
     "assert": "^1.4.1",
 
-    "dl-module": "git+https://github.com/danliris/dl-module.git#uat",
+    "dl-module": "git+https://github.com/ambassador-garmindo/dl-module.git#uat",
     "json2xls": "^0.1.2",
     "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",
     "moment": "^2.16.0",
