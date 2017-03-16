@@ -10,8 +10,9 @@ function getJWTRouter(ManagerType, opts) {
     };
 
     var apiVersion = options.version || "1.0.0";
-    var defaultSelect = options.defaultSelect || [];
     var defaultOrder = options.defaultOrder || {};
+    var defaultFilter = options.defaultFilter || {};
+    var defaultSelect = options.defaultSelect || [];
 
     var getManager = (user) => {
         return db.get()
@@ -25,8 +26,10 @@ function getJWTRouter(ManagerType, opts) {
     router.get("/", passport, function(request, response, next) {
         var user = request.user;
         var query = request.query;
-        query.order = Object.assign({}, defaultOrder, query.order);
-        query.select = query.select || defaultSelect;
+
+        query.filter = Object.assign({}, query.filter, typeof defaultFilter === "function" ? defaultFilter(request, response, next) : defaultFilter, query.filter);
+        query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order);
+        query.select = query.select ? query.select : typeof defaultSelect === "function" ? defaultSelect(request, response, next) : defaultSelect;
         
         getManager(user)
             .then((manager) => {

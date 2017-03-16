@@ -8,7 +8,7 @@ function getRouter() {
         defaultOrder: {
             "_updatedDate": -1
         },
-        defaultSelect:["no","supplier.name","items"]
+        defaultSelect:["no","supplierDoDate","supplier.name","items.purchaseOrderExternal.no"]
     });
     return router;
 }
