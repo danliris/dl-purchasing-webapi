@@ -5,6 +5,7 @@ function server() {
 
         var restify = require('restify');
         restify.CORS.ALLOW_HEADERS.push('authorization');
+        restify.CORS.ALLOW_HEADERS.push('x-timezone-offset');
 
         var passport = require('passport');
         var server = restify.createServer();
@@ -24,6 +25,9 @@ function server() {
             query.order = !query.order ? {} : JSON.parse(query.order);
             query.filter = !query.filter ? {} : JSON.parse(query.filter);
             request.queryInfo = query;
+
+            var timezoneOffset = Number(request.headers["x-timezone-offset"]);
+            request.timezoneOffset = timezoneOffset;
             next();
         });
 
