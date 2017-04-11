@@ -72,7 +72,7 @@ function getRouter() {
                                         "Harga Total": PO.purchaseOrderExternal ? (item.pricePerDealUnit * item.dealQuantity * PO.purchaseOrderExternal.currencyRate) : 0,
                                         "Kode Supplier": PO.supplier.code ? PO.supplier.code : "-",
                                         "Nama Supplier": PO.supplier.name ? PO.supplier.name : "-",
-                                        "Tanggal Terima PO Internal": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
+                                        "Tanggal Terima PO Internal": moment(new Date(PO._createdDate)).format(dateFormat),
                                         "Tanggal Terima PO Eksternal": PO.purchaseOrderExternal.date ? moment(new Date(PO.purchaseOrderExternal.date)).format(dateFormat) : "-",
                                         "Tanggal Target Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).format(dateFormat) : "-",
                                         "No PO Eksternal": PO.purchaseOrderExternal.no ? PO.purchaseOrderExternal.no : "-",
