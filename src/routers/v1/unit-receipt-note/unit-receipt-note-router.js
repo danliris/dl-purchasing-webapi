@@ -40,9 +40,6 @@ var handlePdfRequest = function(request, response, next) {
 function getRouter() {
     var router = JwtRouterFactory(Manager, {
         version: apiVersion,
-        defaultOrder: {
-            "_updatedDate": -1
-        },
         defaultSelect:["unit.division.name","unit.name",,"no","date","supplier.name","deliveryOrder.no"]
     });
 
