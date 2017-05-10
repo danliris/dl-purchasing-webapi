@@ -21,8 +21,10 @@ function getRouter() {
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var state = parseInt(request.params.state);
+            var budgetId = request.params.budgetId;
+            var staffName = request.params.staffName;
 
-            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state)
+            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, staffName)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
@@ -63,6 +65,8 @@ function getRouter() {
                                         "No": index,
                                         "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
                                         "No Purchase Request": PO.purchaseRequest.no,
+                                        "Kategori": PO.category.name,
+                                        "Budget": PO.purchaseRequest.budget.name,
                                         "Nama Barang": item.product.name,
                                         "Kode Barang": item.product.code,
                                         "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
@@ -100,7 +104,8 @@ function getRouter() {
                                         "Nilai Koreksi": _correctionPriceTotal || 0,
                                         "Ket. Koreksi": _correctionRemark || "-",
                                         "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                        "Status": PO.status ? PO.status.label : "-"
+                                        "Status": PO.status ? PO.status.label : "-",
+                                        "Staff Pembelian": PO._createdBy
                                     }
                                     data.push(_item);
                                 }
@@ -111,6 +116,8 @@ function getRouter() {
                                     "No": index,
                                     "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
                                     "No Purchase Request": PO.purchaseRequest.no,
+                                    "Kategori": PO.category.name,
+                                    "Budget": PO.purchaseRequest.budget.name,
                                     "Nama Barang": item.product.name,
                                     "Kode Barang": item.product.code,
                                     "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
@@ -148,7 +155,8 @@ function getRouter() {
                                     "Nilai Koreksi": 0,
                                     "Ket. Koreksi": "-",
                                     "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
-                                    "Status": PO.status ? PO.status.label : "-"
+                                    "Status": PO.status ? PO.status.label : "-",
+                                    "Staff Pembelian": PO._createdBy
                                 }
                                 data.push(_item);
                             }
@@ -163,6 +171,8 @@ function getRouter() {
                             "No": "number",
                             "Tanggal Purchase Request": "string",
                             "No Purchase Request": "string",
+                            "Kategori": "string",
+                            "Budget": "string",
                             "Nama Barang": "string",
                             "Kode Barang": "string",
                             "Jumlah Barang": "number",
@@ -196,7 +206,8 @@ function getRouter() {
                             "No PPH": "string",
                             "Nilai PPH": "string",
                             "Keterangan": "string",
-                            "Status": "string"
+                            "Status": "string",
+                            "Staff Pembelian": "string"
                         };
 
 
