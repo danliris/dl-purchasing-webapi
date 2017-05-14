@@ -57,6 +57,11 @@ var v1BudgetDealUnitPaymentOrder = require('../src/routers/v1/generating-data/ge
 var v1BudgetDealUnitPaymentCorrectionNote = require('../src/routers/v1/generating-data/generating-data-unit-payment-correction-note-router');
 //ETL
 var v1FactPembelianRouter = require('../src/routers/v1/etl/fact-pembelian-router');
+//DURATION REPORT
+var v1PurchaseRequestPurchaseOrderDurationReportRouter = require('../src/routers/v1/duration-report/purchase-request-purchase-order-duration-report-router');
+var v1PurchaseOrderPurchaseOrderExternalDurationReportRouter = require('../src/routers/v1/duration-report/purchase-order-purchase-order-external-duration-report-router');
+var v1PurchaseRequestPurchaseOrderExternalDurationReportRouter = require('../src/routers/v1/duration-report/purchase-request-purchase-order-external-duration-report-router');
+var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/routers/v1/duration-report/purchase-order-external-delivery-order-duration-report-router');
 
  module.exports = function(server) {
     //PURCHASE REQUEST
@@ -121,4 +126,9 @@ var v1FactPembelianRouter = require('../src/routers/v1/etl/fact-pembelian-router
     v1BudgetDealUnitPaymentCorrectionNote().applyRoutes(server,             "/generating-data/unit-payment-correction-note");
     //FACT PEMBELIAN
     v1FactPembelianRouter().applyRoutes(server,                             "/fact-pembelian");
- };
+    //DURATION REPORT
+    v1PurchaseRequestPurchaseOrderDurationReportRouter().applyRoutes(server,   "/duration-report/purchase-request-to-purchase-order-duration-reports");
+    v1PurchaseOrderPurchaseOrderExternalDurationReportRouter().applyRoutes(server,   "/duration-report/purchase-order-to-purchase-order-external-duration-reports");
+    v1PurchaseRequestPurchaseOrderExternalDurationReportRouter().applyRoutes(server,   "/duration-report/purchase-request-to-purchase-order-external-duration-reports");
+    v1PurchaseOrderExternalDeliveryOrderDurationReportRouter().applyRoutes(server,   "/duration-report/purchase-order-external-to-delivery-order-duration-reports");
+};
