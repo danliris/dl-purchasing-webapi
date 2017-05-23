@@ -32,8 +32,38 @@ function getRouter() {
 
                 }
             };
+            var select = ["no",
+                "date",
+                "items.product._id",
+                "items.product.code",
+                "items.product.name",
+                "items.deliveredQuantity",
+                "items.deliveredUom._id",
+                "items.deliveredUom.unit",
+                "items.pricePerDealUnit",
+                "items.currency._id",
+                "items.currency.code",
+                "items.currency.symbol",
+                "items.currency.rate",
+                "items.currencyRate",
+                "items.correction",
+                "items.purchaseOrderId",
+                "items.purchaseOrder._id",
+                "items.purchaseOrder.purchaseOrderExternal.no",
+                "items.purchaseOrder.purchaseOrderExternal._id",
+                "items.purchaseOrder.currency._id",
+                "items.purchaseOrder.currency.symbol",
+                "items.purchaseOrder.currency.code",
+                "items.purchaseOrder.currency.rate",
+                "items.purchaseOrder.purchaseRequest.no",
+                "items.purchaseOrder.purchaseRequest._id",
+                "items.purchaseOrder.items.useIncomeTax",
+                "items.purchaseOrder.items.product._id",
+                "items.purchaseOrder.items.product.code",
+                "items.purchaseOrder.items.product.name"];
 
             query.filter = filter;
+            query.select = select;
             manager.read(query)
                 .then(docs => {
                     var result = resultFormatter.ok(apiVersion, 200, docs.data);
