@@ -34,6 +34,7 @@ function getRouter() {
             };
             var select = ["no",
             "date",
+            "deliveryOrder.no",
             "items.product._id",
             "items.product.code",
             "items.product.name",
