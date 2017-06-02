@@ -28,7 +28,7 @@ function getRouter() {
                     } else {
 
                         var dateFormat = "DD/MM/YYYY";
-                        var dateFormat = "DD MMMM YYYY";
+                        // var dateFormat = "DD MMMM YYYY";
                         var locale = 'id-ID';
                         var moment = require('moment');
                         moment.locale(locale);
@@ -75,7 +75,7 @@ function getRouter() {
                             "Tanggal Diminta Datang": "string",
                             "Status": "string",
                         };
-                        response.xls(`Monitoring Purchase Request - ${moment(new Date()).format(dateFormat2)}.xlsx`, data, options);
+                        response.xls(`Monitoring Purchase Request - ${moment(new Date()).format(dateFormat)}.xlsx`, data, options);
 
                     }
                 })
