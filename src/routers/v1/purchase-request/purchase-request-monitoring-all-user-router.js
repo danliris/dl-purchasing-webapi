@@ -28,6 +28,7 @@ function getRouter() {
                     } else {
 
                         var dateFormat = "DD/MM/YYYY";
+                        // var dateFormat = "DD MMMM YYYY";
                         var locale = 'id-ID';
                         var moment = require('moment');
                         moment.locale(locale);
