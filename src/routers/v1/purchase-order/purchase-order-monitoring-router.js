@@ -64,6 +64,7 @@ function getRouter() {
                                     var _item = {
                                         "No": index,
                                         "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
+                                        "Tanggal Pembuatan PR": moment(new Date(PO.purchaseRequest._createdDate)).format(dateFormat),
                                         "No Purchase Request": PO.purchaseRequest.no,
                                         "Kategori": PO.category.name,
                                         "Budget": PO.purchaseRequest.budget.name,
@@ -77,6 +78,7 @@ function getRouter() {
                                         "Nama Supplier": PO.supplier.name ? PO.supplier.name : "-",
                                         "Tanggal Terima PO Internal": moment(new Date(PO._createdDate)).format(dateFormat),
                                         "Tanggal Terima PO Eksternal": PO.purchaseOrderExternal.date ? moment(new Date(PO.purchaseOrderExternal.date)).format(dateFormat) : "-",
+                                        "Tanggal Pembuatan PO Eksternal": PO.purchaseOrderExternal._createdDate ? moment(new Date(PO.purchaseOrderExternal._createdDate)).format(dateFormat) : "-",
                                         "Tanggal Target Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).format(dateFormat) : "-",
                                         "No PO Eksternal": PO.purchaseOrderExternal.no ? PO.purchaseOrderExternal.no : "-",
                                         "Tanggal Surat Jalan": fulfillment.supplierDoDate ? moment(new Date(fulfillment.supplierDoDate)).format(dateFormat) : "-",
@@ -115,6 +117,7 @@ function getRouter() {
                                 var _item = {
                                     "No": index,
                                     "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
+                                    "Tanggal Pembuatan PR": moment(new Date(PO.purchaseRequest._createdDate)).format(dateFormat),
                                     "No Purchase Request": PO.purchaseRequest.no,
                                     "Kategori": PO.category.name,
                                     "Budget": PO.purchaseRequest.budget.name,
@@ -128,6 +131,7 @@ function getRouter() {
                                     "Nama Supplier": PO.supplier.name ? PO.supplier.name : "-",
                                     "Tanggal Terima PO Internal": moment(new Date(PO._createdDate)).format(dateFormat),
                                     "Tanggal Terima PO Eksternal": PO.purchaseOrderExternal.date ? moment(new Date(PO.purchaseOrderExternal.date)).format(dateFormat) : "-",
+                                    "Tanggal Pembuatan PO Eksternal": PO.purchaseOrderExternal._createdDate ? moment(new Date(PO.purchaseOrderExternal._createdDate)).format(dateFormat) : "-",
                                     "Tanggal Target Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).format(dateFormat) : "-",
                                     "No PO Eksternal": PO.purchaseOrderExternal.no,
                                     "Tanggal Surat Jalan": "-",
@@ -170,6 +174,7 @@ function getRouter() {
                         var options = {
                             "No": "number",
                             "Tanggal Purchase Request": "string",
+                            "Tanggal Pembuatan PR": "string",
                             "No Purchase Request": "string",
                             "Kategori": "string",
                             "Budget": "string",
@@ -183,6 +188,7 @@ function getRouter() {
                             "Nama Supplier": "string",
                             "Tanggal Terima PO Internal": "string",
                             "Tanggal Terima PO Eksternal": "string",
+                            "Tanggal Pembuatan PO Eksternal": "string",
                             "Tanggal Target Datang": "string",
                             "No PO Eksternal": "string",
                             "Tanggal Surat Jalan": "string",
