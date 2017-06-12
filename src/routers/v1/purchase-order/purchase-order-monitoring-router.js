@@ -107,7 +107,7 @@ function getRouter() {
                                         "Ket. Koreksi": _correctionRemark || "-",
                                         "Keterangan": PO.purchaseOrderExternal.remark ? PO.purchaseOrderExternal.remark : "-",
                                         "Status": PO.status ? PO.status.label : "-",
-                                        "Staff Pembelian": PO._createdBy
+                                        "Staff Pembelian": PO._createdBy,
                                     }
                                     data.push(_item);
                                 }
