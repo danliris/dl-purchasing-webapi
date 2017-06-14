@@ -35,8 +35,10 @@ function getRouter() {
             var select = [
                 "no",
                 "refNo",
+                "date",
                 "supplierDoDate",
                 "supplierId",
+                "supplier._id",
                 "supplier.code",
                 "supplier.name",
                 "isPosted",
@@ -50,6 +52,7 @@ function getRouter() {
                 "items.fulfillments.purchaseOrderUom.unit",
                 "items.fulfillments.deliveredQuantity",
                 "items.fulfillments.realizationQuantity",
+                "items.fulfillments.productId",
                 "items.fulfillments.product._id",
                 "items.fulfillments.product.code",
                 "items.fulfillments.product.name",
