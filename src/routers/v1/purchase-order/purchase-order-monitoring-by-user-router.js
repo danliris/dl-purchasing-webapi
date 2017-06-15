@@ -64,6 +64,7 @@ function getRouter() {
                                     var _item = {
                                         "No": index,
                                         "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).add(offset, 'h').format(dateFormat),
+                                        "Tanggal Pembuatan PR": moment(new Date(PO.purchaseRequest._createdDate)).add(offset, 'h').format(dateFormat),
                                         "No Purchase Request": PO.purchaseRequest.no,
                                         "Kategori": PO.category.name,
                                         "Budget": PO.purchaseRequest.budget.name,
@@ -77,6 +78,7 @@ function getRouter() {
                                         "Nama Supplier": PO.supplier.name ? PO.supplier.name : "-",
                                         "Tanggal Terima PO Internal": moment(new Date(PO._createdDate)).add(offset, 'h').format(dateFormat),
                                         "Tanggal Terima PO Eksternal": PO.purchaseOrderExternal.date ? moment(new Date(PO.purchaseOrderExternal.date)).add(offset, 'h').format(dateFormat) : "-",
+                                        "Tanggal Pembuatan PO Eksternal": PO.purchaseOrderExternal._createdDate ? moment(new Date(PO.purchaseOrderExternal._createdDate)).add(offset, 'h').format(dateFormat) : "-",
                                         "Tanggal Target Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
                                         "No PO Eksternal": PO.purchaseOrderExternal.no ? PO.purchaseOrderExternal.no : "-",
                                         "Tanggal Surat Jalan": fulfillment.supplierDoDate ? moment(new Date(fulfillment.supplierDoDate)).add(offset, 'h').format(dateFormat) : "-",
@@ -114,6 +116,7 @@ function getRouter() {
                                 var _item = {
                                     "No": index,
                                     "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).add(offset, 'h').format(dateFormat),
+                                    "Tanggal Pembuatan PR": moment(new Date(PO.purchaseRequest._createdDate)).add(offset, 'h').format(dateFormat),
                                     "No Purchase Request": PO.purchaseRequest.no,
                                     "Kategori": PO.category.name,
                                     "Budget": PO.purchaseRequest.budget.name,
@@ -127,6 +130,7 @@ function getRouter() {
                                     "Nama Supplier": PO.supplier.name ? PO.supplier.name : "-",
                                     "Tanggal Terima PO Internal": moment(new Date(PO.purchaseRequest.date)).add(offset, 'h').format(dateFormat),
                                     "Tanggal Terima PO Eksternal": PO.purchaseOrderExternal.date ? moment(new Date(PO.purchaseOrderExternal.date)).add(offset, 'h').format(dateFormat) : "-",
+                                    "Tanggal Pembuatan PO Eksternal": PO.purchaseOrderExternal._createdDate ? moment(new Date(PO.purchaseOrderExternal._createdDate)).add(offset, 'h').format(dateFormat) : "-",
                                     "Tanggal Target Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
                                     "No PO Eksternal": PO.purchaseOrderExternal.no,
                                     "Tanggal Surat Jalan": "-",

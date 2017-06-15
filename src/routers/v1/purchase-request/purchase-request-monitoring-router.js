@@ -20,6 +20,7 @@ function getRouter() {
             var dateTo = request.params.dateTo;
             var state = parseInt(request.params.state);
             var createdBy = request.user.username;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
             manager.getDataPRMonitoring(unitId, categoryId, budgetId, PRNo, dateFrom, dateTo, state, createdBy)
                 .then(docs => {
@@ -49,13 +50,13 @@ function getRouter() {
                                     "Unit": `${purchaseRequest.unit.division.name} - ${purchaseRequest.unit.name}`,
                                     "Budget": purchaseRequest.budget.name,
                                     "Kategori": purchaseRequest.category.name,
-                                    "Tanggal PR": moment(new Date(purchaseRequest.date)).format(dateFormat),
+                                    "Tanggal PR": moment(new Date(purchaseRequest.date)).add(offset, 'h').format(dateFormat),
                                     "Nomor PR": purchaseRequest.no,
                                     "Kode Barang": item.product.code,
                                     "Nama Barang": item.product.name,
                                     "Jumlah": item.quantity,
                                     "Satuan": item.product.uom.unit,
-                                    "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).format(dateFormat) : "-",
+                                    "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
                                     "Status": status
                                 }
                                 data.push(_item);
