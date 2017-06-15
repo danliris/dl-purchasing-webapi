@@ -18,12 +18,19 @@ function getRouter() {
             moment.locale(locale);
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             var filter = {};
+            var qDateFrom = new Date(dateFrom);
+            qDateFrom.setHours(qDateFrom.getHours()-offset);
+            
+            var qDateTo = new Date(dateTo);
+            qDateTo.setHours(qDateTo.getHours()-offset);
+            
             if (dateFrom && dateTo) {
                 filter = {
                     date: {
-                        $gte: new Date(dateFrom),
-                        $lte: new Date(dateTo)
+                        $gte: qDateFrom,
+                        $lte: qDateTo
                     }
                 };
             }
@@ -36,10 +43,10 @@ function getRouter() {
                             for (var item of _purchaseOrder.items) {
                                 var _item = {
                                     "NOMOR PO EXTERNAL": _data.no,
-                                    "TANGGAL PO EXTERNAL": moment(new Date(_data.date)).format(dateFormat),
+                                    "TANGGAL PO EXTERNAL": moment(new Date(_data.date)).add(offset, 'h').format(dateFormat),
                                     "KODE SUPPLIER": _data.supplier.code,
                                     "NAMA SUPPLIER": _data.supplier.name,
-                                    "DELIVERY": moment(new Date(_data.expectedDeliveryDate)).format(dateFormat),
+                                    "DELIVERY": moment(new Date(_data.expectedDeliveryDate)).add(offset, 'h').format(dateFormat),
                                     "ONGKIR": _data.freightCostBy,
                                     "PAYMENT": _data.paymentMethod,
                                     "TEMPO": _data.paymentDueDays + " hari",
@@ -119,7 +126,7 @@ function getRouter() {
                     if (dateFrom && dateTo) {
                         response.xls(`Laporan PO Eksternal -  ${moment(new Date(dateFrom)).format("DD MMM YYYY")} -  ${moment(new Date(dateTo)).format("DD MMM YYYY")}.xlsx`, data, options);
                     } else {
-                        response.xls(`Laporan PO Eksternal -  ${moment(new Date()).format("DD MMM YYYY")}.xlsx`, data, options);
+                        response.xls(`Laporan PO Eksternal -  ${moment(new Date()).add(offset, 'h').format("DD MMM YYYY")}.xlsx`, data, options);
                     }
                 })
                 .catch(e => {
