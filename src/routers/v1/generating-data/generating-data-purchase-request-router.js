@@ -20,12 +20,19 @@ function getRouter() {
             moment.locale(locale);
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             var filter = {};
+            var qDateFrom = new Date(dateFrom);
+            qDateFrom.setHours(qDateFrom.getHours()-offset);
+            
+            var qDateTo = new Date(dateTo);
+            qDateTo.setHours(qDateTo.getHours()-offset);
+            
             if (dateFrom && dateTo) {
                 filter = {
                     date: {
-                        $gte: new Date(dateFrom),
-                        $lte: new Date(dateTo)
+                        $gte: qDateFrom,
+                        $lte: qDateTo
                     }
                 };
             }
@@ -47,7 +54,7 @@ function getRouter() {
                                     for (var poInternal of poInternals) {
                                         if (purchaseRequest._id && poInternal.purchaseRequest) {
                                             if (purchaseRequest._id.toString() === poInternal.purchaseRequest._id.toString()) {
-                                                poInternalDate = moment(new Date(poInternal._createdDate)).format(dateFormat);
+                                                poInternalDate = moment(new Date(poInternal._createdDate)).add(offset, 'h').format(dateFormat);
                                                 break;
                                             }
                                         }
@@ -56,8 +63,8 @@ function getRouter() {
                                 for (var item of purchaseRequest.items) {
                                     var _item = {
                                         "NOMOR PURCHASE REQUEST": purchaseRequest.no,
-                                        "TANGGAL PURCHASE REQUEST": moment(new Date(purchaseRequest.date)).format(dateFormat),
-                                        "TANGGAL DIMINTA": moment(new Date(purchaseRequest.expectedDeliveryDate)).format(dateFormat),
+                                        "TANGGAL PURCHASE REQUEST": moment(new Date(purchaseRequest.date)).add(offset, 'h').format(dateFormat),
+                                        "TANGGAL DIMINTA": moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat),
                                         "TANGGAL TERIMA PR": poInternalDate,
                                         "KODE BUDGET": purchaseRequest.budget.code,
                                         "BAGIAN / UNIT": purchaseRequest.unit.division.name + " - " + purchaseRequest.unit.name,
@@ -112,7 +119,7 @@ function getRouter() {
                             if (dateFrom && dateTo) {
                                 response.xls(`Laporan Purchase Request -  ${moment(new Date(dateFrom)).format("DD MMM YYYY")} -  ${moment(new Date(dateTo)).format("DD MMM YYYY")}.xlsx`, data, options);
                             } else {
-                                response.xls(`Laporan Purchase Request -  ${moment(new Date()).format("DD MMM YYYY")}.xlsx`, data, options);
+                                response.xls(`Laporan Purchase Request -  ${moment(new Date()).add(offset, 'h').format("DD MMM YYYY")}.xlsx`, data, options);
                             }
                         })
                         .catch(e => {
