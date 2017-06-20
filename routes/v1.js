@@ -18,6 +18,8 @@ var v1ReportPoUnitPeriodeRouter = require('../src/routers/v1/purchase-order/repo
 var v1ReportPoSubUnitCategoriesPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-category-router');
 var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
+var v1ReportPoSupplierPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-supplier-router');
+var v1ReportPoSubDetailPoExtPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-supplier-poexternal-router');
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
 var v1PurchaseOrderExternalsUnpostedRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-posted-router');
@@ -85,6 +87,9 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/v1/purchase-orders/reports/units-categories");
     v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server,                             "/v1/purchase-orders");
+    v1ReportPoSupplierPeriodeRouter().applyRoutes(server,                   "/v1/purchase-orders/reports/suppliers");
+    v1ReportPoSubDetailPoExtPeriodeRouter().applyRoutes(server,             "/v1/purchase-orders/reports/suppliers-po-external");
+        
     //PURCHASE ORDER EXTERNAL
     v1PurchaseOrderExternalPostRouter().applyRoutes(server,                 "/v1/purchase-orders/externals/post");
     v1PurchaseOrderExternalsUnpostedRouter().applyRoutes(server,            "/v1/purchase-orders/externals/posted"); 
