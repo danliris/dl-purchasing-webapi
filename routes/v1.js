@@ -41,6 +41,7 @@ var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note
 var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 // UNIT PAYMENT NOTE
+var v1UnitPaymentPriceCorrectionMonitoringRouter = require('../src/routers/v1/unit-payment-note/koreksi-harga');
 var v1UnitPaymentPriceCorrectionNoteByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-price-correction-note-by-user-router');
 var v1UnitPaymentPriceCorrectionReturNoteRouter = require('../src/routers/v1/unit-payment-note/unit-payment-price-correction-retur-note-router');
 var v1UnitPaymentPriceCorrectionNoteRouter = require('../src/routers/v1/unit-payment-note/unit-payment-price-correction-note-router');
@@ -111,6 +112,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1UnitPaymentOrderSupplierRouter().applyRoutes(server,                  "/v1/unit-receipt-notes/by-supplier-unit");
     v1UnitReceiptNoteRouter().applyRoutes(server,                           "/v1/unit-receipt-notes");
     //UNIT PAYMENT NOTE
+    v1UnitPaymentPriceCorrectionMonitoringRouter().applyRoutes(server,      "/v1/unit-payment-orders/monitoring/koreksi-harga");
     v1UnitPaymentPriceCorrectionNoteByUserRouter().applyRoutes(server,      "/v1/unit-payment-orders/corrections/prices/by-user");  
     v1UnitPaymentPriceCorrectionReturNoteRouter().applyRoutes(server,       "/v1/unit-payment-orders/corrections/prices/retur"); 
     v1UnitPaymentPriceCorrectionNoteRouter().applyRoutes(server,            "/v1/unit-payment-orders/corrections/prices");
