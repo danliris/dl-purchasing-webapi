@@ -29,6 +29,51 @@ function getRouter() {
 
             query.filter = filter;
 
+            var select = [
+                "_id",
+                "no",
+                "items._id",
+                "items.no",
+                "items.unitId",
+                "items.unit._id",
+                "items.unit.code",
+                "items.unit.name",
+                "items.unit.divisionId",
+                "items.unit.division",
+                "items.currency._id",
+                "items.currency.symbol",
+                "items.currency.code",
+                "items.currency.rate",
+                "items.currencyRate",
+                "items.categoryId",
+                "items.category._id",
+                "items.category.code",
+                "items.category.name",
+                "items.purchaseRequest.no",
+                "items.purchaseRequest._id",
+                "items.items.product._id",
+                "items.items.product.code",
+                "items.items.product.name",
+                "items.items.defaultQuantity",
+                "items.items.defaultUom.unit",
+                "items.items.dealQuantity",
+                "items.items.dealUom.unit",
+                "items.items.realizationQuantity",
+                "items.items.pricePerDealUnit",
+                "items.items.priceBeforeTax",
+                "items.items.currency._id",
+                "items.items.currency.symbol",
+                "items.items.currency.code",
+                "items.items.currency.rate",
+                "items.items.conversion",
+                "items.items.isClosed",
+                "items.items.useIncomeTax",
+                "items.items.remark",
+                "items.items.fulfillments"
+            ];
+
+            query.select = select;
+
             manager.read(query)
                 .then(docs => {
                     var result = resultFormatter.ok(apiVersion, 200, docs.data);
