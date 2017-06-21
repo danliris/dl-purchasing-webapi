@@ -51,6 +51,7 @@ var v1UnitPaymentQuantityCorrectionNoteRouter = require('../src/routers/v1/unit-
 var v1UnitPaymentOrderByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-router'); 
 var v1UnitPaymentOrderReadAllRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-read-all-data-router');
 var v1UnitPaymentOrderRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-router');
+var v1UnitPaymentQuantityCorrectionNoteMonitoringRouter = require('../src/routers/v1/unit-payment-note/correction-quantity');
 // BUDGET DEAL
 var v1BudgetDealPurchaseRequest = require('../src/routers/v1/generating-data/generating-data-purchase-request-router');
 var v1BudgetDealPurchaseOrderExternal = require('../src/routers/v1/generating-data/generating-data-purchase-order-external-router');
@@ -122,6 +123,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1UnitPaymentOrderByUserRouter().applyRoutes(server,                    "/v1/unit-payment-orders/by-user");
     v1UnitPaymentOrderReadAllRouter().applyRoutes(server,                   "/v1/unit-payment-orders/read-all");
     v1UnitPaymentOrderRouter().applyRoutes(server,                          "/v1/unit-payment-orders");
+    v1UnitPaymentQuantityCorrectionNoteMonitoringRouter().applyRoutes(server, "/v1/unit-payment-orders/monitoring/correction-quantity");
     //BUDGET DEAL
     v1BudgetDealPurchaseRequest().applyRoutes(server,                       "/v1/generating-data/purchase-request");
     v1BudgetDealPurchaseOrderExternal().applyRoutes(server,                 "/v1/generating-data/purchase-order-external");
