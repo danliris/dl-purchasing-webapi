@@ -25,7 +25,7 @@ function getRouter() {
             var staffName = request.params.staffName;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, staffName)
+            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, staffName, offset)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";

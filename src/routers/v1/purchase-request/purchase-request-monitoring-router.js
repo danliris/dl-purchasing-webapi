@@ -22,7 +22,7 @@ function getRouter() {
             var createdBy = request.user.username;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataPRMonitoring(unitId, categoryId, budgetId, PRNo, dateFrom, dateTo, state, createdBy)
+            manager.getDataPRMonitoring(unitId, categoryId, budgetId, PRNo, dateFrom, dateTo, state, offset, createdBy)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);

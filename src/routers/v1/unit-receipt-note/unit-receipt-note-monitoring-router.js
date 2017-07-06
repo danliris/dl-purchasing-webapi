@@ -18,8 +18,9 @@ function getRouter() {
             var unitId = request.params.unitId;
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo)
+            manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo, offset)
                 .then(docs => {
                     var dateFormat = "DD/MM/YYYY";
                     var dateFormat2 = "DD MMM YYYY";

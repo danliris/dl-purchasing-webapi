@@ -13,7 +13,8 @@ function getRouter(){
             var manager = new PurchaseOrderManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
-            manager.getDataPOSupplier(sdate, edate)
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
+            manager.getDataPOSupplier(sdate, edate, offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
