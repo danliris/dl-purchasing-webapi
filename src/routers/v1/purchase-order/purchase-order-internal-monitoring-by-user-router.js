@@ -24,7 +24,7 @@ function getRouter() {
             var createdBy = request.user.username;
             var budgetId = request.params.budgetId;
 
-            manager.getDataPOMonitoringPembelian(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", createdBy)
+            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", createdBy)
             //manager.getDataPOMonitoringPembelian(unitId, categoryId)
                 .then(docs => {
 
