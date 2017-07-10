@@ -25,7 +25,7 @@ function getRouter() {
             var budgetId = request.params.budgetId;
 
             manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", createdBy)
-            //manager.getDataPOMonitoringPembelian(unitId, categoryId)
+             //manager.getDataPOMonitoringPembelian(unitId, categoryId)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
