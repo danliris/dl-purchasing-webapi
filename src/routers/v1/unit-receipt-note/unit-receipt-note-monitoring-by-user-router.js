@@ -6,7 +6,7 @@ var resultFormatter = require("../../../result-formatter");
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
 
-function getRouter(){
+function getRouter() {
     var router = new Router();
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
@@ -19,8 +19,9 @@ function getRouter(){
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var createdBy = request.user.username;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo, createdBy)
+            manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo, offset, createdBy)
                 .then(docs => {
                     var dateFormat = "DD/MM/YYYY";
                     var dateFormat2 = "DD MMM YYYY";
@@ -34,7 +35,7 @@ function getRouter(){
                     for (var unitReceiptNote of docs) {
                         for (var item of unitReceiptNote.items) {
                             var sisa = 0;
-                            
+
                             for (var poItem of item.purchaseOrder.items) {
                                 if (poItem.product._id.toString() == item.product._id.toString()) {
                                     for (var fulfillment of poItem.fulfillments) {

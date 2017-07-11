@@ -13,8 +13,9 @@ function getRouter(){
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
             var divisiId = request.params.divisiId;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataPODetailUnit(sdate, edate, divisiId)
+            manager.getDataPODetailUnit(sdate, edate, divisiId, offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);

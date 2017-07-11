@@ -19,8 +19,9 @@ function getRouter() {
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var createdBy = request.user.username;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataDeliveryOrder(no, supplierId, dateFrom, dateTo, createdBy)
+            manager.getDataDeliveryOrder(no, supplierId, dateFrom, dateTo, offset, createdBy)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
