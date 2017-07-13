@@ -9,7 +9,7 @@ var handlePdfRequest = function (request, response, next) {
         .then(db => {
             var manager = new Manager(db, request.user);
             var id = request.params.id;
-            manager.pdf(id)
+            manager.pdf(id, request.timezoneOffset)
                 .then(docBinary => {
                     manager.getSingleById(id)
                         .then(doc => {
