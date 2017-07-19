@@ -13,7 +13,11 @@ function getRouter(){
             var manager = new PurchaseOrderManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
-            manager.getDataPOSupplier(sdate, edate)
+            var unit = request.params.unit;
+            var category = request.params.category;
+            var supplier = request.params.supplier;
+            
+            manager.getDataPOSupplier(unit, category, supplier, sdate, edate)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
@@ -32,6 +36,7 @@ function getRouter(){
                             for (var Po of docs) {
                                 PriceTotals +=Po.pricetotal;
                             }
+                          
                             for (var purchaseOrder of docs) {
                                 index++;
                                 var x= purchaseOrder.pricetotal.toFixed(2).toString().split('.');
@@ -39,7 +44,9 @@ function getRouter(){
                                 var amount= x1 + '.' + x[1];
                                 var item={
                                     "No": index,
-                                    "Supplier":purchaseOrder._id.name,
+                                    "Unit":purchaseOrder._id.unit,
+                                    "Kategori":purchaseOrder._id.category,
+                                    "Supplier":purchaseOrder._id.supplier,
                                     "Rp"    : amount,
                                     "%":((purchaseOrder.pricetotal/PriceTotals)*100).toFixed(2)
                                 }
@@ -53,13 +60,15 @@ function getRouter(){
                             var y1=y[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             var amounts= y1 + '.' + y[1];
                             var totals={
-                                "Unit":"Total",
+                                "Jumlah Total":"Total Pembelian . . . . . . . . . . .  :",
                                 "Rp": amounts,
                                 "%": TotalPercentage
                             };
                             data.push(totals);
                             var options = {
                                 "No": "number",
+                                "Unit": "string",
+                                "Kategori": "string",
                                 "Supplier": "string",
                                  "Rp": "number",
                                 "%": "number",
