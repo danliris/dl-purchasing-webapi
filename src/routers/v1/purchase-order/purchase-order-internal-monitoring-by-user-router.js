@@ -11,7 +11,6 @@ function getRouter() {
     var router = new Router();
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
-            var manager = new PurchaseOrderManager(db);
             var manager = new PurchaseOrderManager(db, request.user);
 
             var unitId = request.params.unitId;
@@ -64,6 +63,9 @@ function getRouter() {
 
                                     var _item = {
                                         "Divisi": PO.purchaseRequest.unit.division.name,
+                                        "Nama Barang": item.product.name,
+                                        "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
+                                        "Satuan Barang": item.dealUom.unit ? item.dealUom.unit : "-",
                                         "Unit": PO.unit.name,
                                         "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
                                         "No Purchase Request": PO.purchaseRequest.no,
@@ -80,14 +82,17 @@ function getRouter() {
                                 index++;
                                 var _item = {
                                     "Divisi": PO.purchaseRequest.unit.division.name,
+                                    "Nama Barang": item.product.name,
+                                    "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
+                                    "Satuan Barang": item.dealUom.unit ? item.dealUom.unit : "-",
                                     "Unit": PO.unit.name,
-                                        "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
-                                        "No Purchase Request": PO.purchaseRequest.no,
-                                        "Kategori": PO.category.name,
-                                        "Budget": PO.purchaseRequest.budget.name,
-                                        "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
-                                        "Staff": PO._createdBy,
-                                        "Status": PO.status ? PO.status.label : "-"
+                                    "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
+                                    "No Purchase Request": PO.purchaseRequest.no,
+                                    "Kategori": PO.category.name,
+                                    "Budget": PO.purchaseRequest.budget.name,
+                                    "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
+                                    "Staff": PO._createdBy,
+                                    "Status": PO.status ? PO.status.label : "-"
                                 }
                                 data.push(_item);
                             }
@@ -101,6 +106,9 @@ function getRouter() {
                         var options = {
                             "Divisi": "string",
                             "Unit": "string",
+                            "Nama Barang": "string",
+                            "Jumlah Barang": "number",
+                            "Satuan Barang": "string",
                             "Tanggal Purchase Request": "string",
                             "No Purchase Request": "string",
                             "Kategori": "string",
@@ -111,7 +119,7 @@ function getRouter() {
                         };
 
 
-                        response.xls(`Laporan Monitoring Pembelian - ${moment(new Date()).add(offset, 'h').format(dateFormat2)}.xlsx`, data, options);
+                        response.xls(`Laporan Monitoring Purchase Order Internal - ${moment(new Date()).add(offset, 'h').format(dateFormat2)}.xlsx`, data, options);
                     }
                 })
                 .catch(e => {
