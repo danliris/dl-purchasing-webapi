@@ -24,7 +24,8 @@ function getRouter() {
             var createdBy = request.user.username;
             var budgetId = request.params.budgetId;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
-            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", offset, createdBy)
+            // manager.getDataPOIntMonitoring(unitId, categoryId, dateFrom, dateTo, "", offset)
+            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", offset)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
@@ -62,6 +63,7 @@ function getRouter() {
                                     }
 
                                     var _item = {
+                                        "No" : index,
                                         "Divisi": PO.purchaseRequest.unit.division.name,
                                         "Nama Barang": item.product.name,
                                         "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
@@ -71,7 +73,7 @@ function getRouter() {
                                         "No Purchase Request": PO.purchaseRequest.no,
                                         "Kategori": PO.category.name,
                                         "Budget": PO.purchaseRequest.budget.name,
-                                        "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
+                                        "Tanggal Diminta Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
                                         "Staff": PO._createdBy,
                                         "Status": PO.status ? PO.status.label : "-"
                                     }
@@ -81,6 +83,7 @@ function getRouter() {
                             else {
                                 index++;
                                 var _item = {
+                                    "No" : index,
                                     "Divisi": PO.purchaseRequest.unit.division.name,
                                     "Nama Barang": item.product.name,
                                     "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
@@ -90,7 +93,7 @@ function getRouter() {
                                     "No Purchase Request": PO.purchaseRequest.no,
                                     "Kategori": PO.category.name,
                                     "Budget": PO.purchaseRequest.budget.name,
-                                    "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
+                                    "Tanggal Diminta Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
                                     "Staff": PO._createdBy,
                                     "Status": PO.status ? PO.status.label : "-"
                                 }
@@ -104,6 +107,7 @@ function getRouter() {
                     }
                     else {
                         var options = {
+                            "No" : "number",
                             "Divisi": "string",
                             "Unit": "string",
                             "Nama Barang": "string",
