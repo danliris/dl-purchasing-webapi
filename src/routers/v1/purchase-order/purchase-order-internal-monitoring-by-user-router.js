@@ -15,16 +15,17 @@ function getRouter() {
 
             var unitId = request.params.unitId;
             var categoryId = request.params.categoryId;
-            // var PODLNo = request.params.PODLNo;
-            // var PRNo = request.params.PRNo;
-            // var supplierId = request.params.supplierId;
+            var PODLNo = request.params.PODLNo;
+            var PRNo = request.params.PRNo;
+            var supplierId = request.params.supplierId;
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
-            // var state = parseInt(request.params.state);
-            // var createdBy = request.user.username;
-            // var budgetId = request.params.budgetId;
+            var state = parseInt(request.params.state);
+            var createdBy = request.user.username;
+            var budgetId = request.params.budgetId;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
-            manager.getDataPOIntMonitoring(unitId, categoryId, dateFrom, dateTo, "", offset)
+            // manager.getDataPOIntMonitoring(unitId, categoryId, dateFrom, dateTo, "", offset)
+            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", offset)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
