@@ -33,6 +33,8 @@ function getRouter() {
                                 "No": index,
                                 "Unit": `${unitReceiptNote.unit.division.name} - ${unitReceiptNote.unit.name}`,
                                 "Supplier": unitReceiptNote.supplier.name,
+                                "No Surat Jalan": unitReceiptNote.deliveryOrder.no,
+                                "Tanggal Surat Jalan": moment(new Date(unitReceiptNote.deliveryOrder.date)).format(dateFormat),
                                 "Tanggal Bon Terima Unit": moment(new Date(unitReceiptNote.date)).format(dateFormat),
                                 "No Bon Terima Unit": unitReceiptNote.no,
                                 "User": unitReceiptNote._createdBy
@@ -49,6 +51,8 @@ function getRouter() {
                             "No": "number",
                             "Unit": "string",
                             "Supplier": "string",
+                            "No Surat Jalan": "string",
+                            "Tanggal Surat Jalan": "string",
                             "Tanggal Bon Terima Unit": "string",
                             "No Bon Terima Unit": "string",
                             "User":"string"
