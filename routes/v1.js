@@ -4,6 +4,7 @@ var v1PurchaseRequestPostedRouter = require('../src/routers/v1/purchase-request/
 var v1PurchaseRequestPostRouter = require('../src/routers/v1/purchase-request/purchase-request-post-router');
 var v1PurchaseRequestByUserRouter = require('../src/routers/v1/purchase-request/purchase-request-by-user-router');
 var v1PurchaseRequestMonitoringRouter = require('../src/routers/v1/purchase-request/purchase-request-monitoring-router');
+var v1PurchaseRequestMonitoringAllRouter = require('../src/routers/v1/purchase-request/purchase-request-monitoring-all-router');
 var v1PurchaseRequestRouter = require('../src/routers/v1/purchase-request/purchase-request-router');
 var v1PurchaseRequestByRoleRouter = require('../src/routers/v1/purchase-request/purchase-request-by-role-router');
 var v1PurchaseRequestMonitoringAllUserRouter = require('../src/routers/v1/purchase-request/purchase-request-monitoring-all-user-router');
@@ -83,7 +84,8 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1PurchaseRequestPostedRouter().applyRoutes(server,                     "/v1/purchase-requests/posted");
     v1PurchaseRequestPostRouter().applyRoutes(server,                       "/v1/purchase-requests/post");
     v1PurchaseRequestByUserRouter().applyRoutes(server,                     "/v1/purchase-requests/by-user");
-    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring"); 
+    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring");
+    v1PurchaseRequestMonitoringAllRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring-all");  
     v1PurchaseRequestByRoleRouter().applyRoutes(server,                     "/v1/purchase-requests/by-role");
     v1PurchaseRequestMonitoringAllUserRouter().applyRoutes(server,          "/v1/purchase-requests/monitoring-all-user");
     v1PurchaseRequestRouter().applyRoutes(server,                           "/v1/purchase-requests"); 
