@@ -83,7 +83,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1PurchaseRequestPostedRouter().applyRoutes(server,                     "/v1/purchase-requests/posted");
     v1PurchaseRequestPostRouter().applyRoutes(server,                       "/v1/purchase-requests/post");
     v1PurchaseRequestByUserRouter().applyRoutes(server,                     "/v1/purchase-requests/by-user");
-    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring"); 
+    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring");
     v1PurchaseRequestByRoleRouter().applyRoutes(server,                     "/v1/purchase-requests/by-role");
     v1PurchaseRequestMonitoringAllUserRouter().applyRoutes(server,          "/v1/purchase-requests/monitoring-all-user");
     v1PurchaseRequestRouter().applyRoutes(server,                           "/v1/purchase-requests"); 
