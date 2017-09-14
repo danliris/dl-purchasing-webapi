@@ -13,24 +13,54 @@ function getRouter(){
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
             var staff = request.params.staff;
+            var divisi = request.params.divisi;
+    
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataPODetailStaff(sdate, edate, staff, offset)
+            manager.getDataPODetailStaff(sdate, edate, staff,divisi , offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
                         response.send(200, result);
                     }
                     else {
-                            
-                            var data = [];
+
+                             var data = [];
+                             var jeneng = "";
                             var index = 0;
-                            var selisihTotals=0;
-                            
-                            for (var Po of docs) {
-                                selisihTotals +=Po.selisih;
+                                for (var PO of docs) {
+                                index++;
+                                jeneng=PO.user;
+                                var item = {
+                                        "No": index,
+                                        "Divisi": PO.divisi,
+                                        "Staff Pembelian": PO.user,
+                                        "No PR": PO._id.name,
+                                        "Unit": PO.unit,
+                                        "Tgl Target Kedatangan": PO.tgltarget,
+                                        "Tgl Kedatangan": PO.tgldatang,
+                                        "Selisih Tgl": PO.selisih,
+                                    }
+                                data.push(item);
                             }
-                            
+                                var options = {
+                            "No": "number",
+                            "Staff Pembelian": "string",
+                            "divisi": "string",
+                            "No PR": "string",
+                            "Unit": "string",
+                            "Tgl Target Kedatangan": "string",
+                            "Tgl Kedatangan": "string",
+                            "Selisih Tgl": "string",
+                        };
+
+
+                        
+                        
+                            response.xls(`${jeneng}.xlsx`, data,options);
+                          
+
+                               
                     }
                 }).catch(e => {
                     response.send(500, "gagal ambil data");
