@@ -36,11 +36,12 @@ function getRouter(){
                                         "Divisi": PO.divisi,
                                         "Staff Pembelian": PO.user,
                                         "No PR": PO._id.name,
-                                        "Unit": PO.unit,
+                                        "Nama Barang": PO.nmbarang,
+                                        "Supplier": PO.nmsupp,
                                         "Tgl Target Kedatangan": PO.tgltarget,
                                         "Tgl Kedatangan": PO.tgldatang,
                                         "Selisih Tgl": PO.selisih,
-                                    }
+                                        "Unit": PO.unit,                                    }
                                 data.push(item);
                             }
                                 var options = {
@@ -48,10 +49,12 @@ function getRouter(){
                             "Staff Pembelian": "string",
                             "divisi": "string",
                             "No PR": "string",
-                            "Unit": "string",
+                            "Nama Barang": "string",
+                            "Supplier": "string",
                             "Tgl Target Kedatangan": "string",
                             "Tgl Kedatangan": "string",
                             "Selisih Tgl": "string",
+                            "unit": "string",
                         };
 
 
