@@ -13,18 +13,19 @@ function getRouter(){
             var manager = new PurchaseOrderManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
+            var divisi = request.params.divisi;
+            //var divisiId = request.params.divisiId;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
-            manager.getDataPOStaff(sdate, edate, offset)
+            manager.getDataPOStaff(sdate, edate,divisi, offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
                         response.send(200, result);
                     }
                     else {
-                           
-                            var data = [];
+                         var data = [];
                             var index = 0;
-                            
+                      
                         }
                 })
                 .catch(e => {
