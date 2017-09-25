@@ -38,9 +38,12 @@ function getRouter(){
                                         "No PR": PO._id.name,
                                         "Nama Barang": PO.nmbarang,
                                         "Supplier": PO.nmsupp,
+                                        "Tgl Terima PO Int": PO.tglpoint,
+                                        "Tgl Terima PO Eks": PO.tglpoeks,
+                                        "Selisih 1": PO.selisih2,
                                         "Tgl Target Kedatangan": PO.tgltarget,
                                         "Tgl Kedatangan": PO.tgldatang,
-                                        "Selisih Tgl": PO.selisih,
+                                        "Selisih 2": PO.selisih,
                                         "Unit": PO.unit,                                    }
                                 data.push(item);
                             }
@@ -51,9 +54,12 @@ function getRouter(){
                             "No PR": "string",
                             "Nama Barang": "string",
                             "Supplier": "string",
+                            "Tgl Terima PO Int": "string",
+                            "Tgl Terima PO Eks": "string",
+                            "Selisih 1": "string",
                             "Tgl Target Kedatangan": "string",
                             "Tgl Kedatangan": "string",
-                            "Selisih Tgl": "string",
+                            "Selisih 2": "string",
                             "unit": "string",
                         };
 
