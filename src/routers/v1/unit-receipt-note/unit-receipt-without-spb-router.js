@@ -28,6 +28,7 @@ function getRouter() {
                     var index = 0;
 
                     for (var unitReceiptNote of docs) {
+                        for (var item of unitReceiptNote.items){
                         
                             index++;
                             var _item = {
@@ -37,12 +38,14 @@ function getRouter() {
                                 "No Surat Jalan": unitReceiptNote.deliveryOrder.no,
                                 "Tanggal Surat Jalan": moment(new Date(unitReceiptNote.deliveryOrder.date)).format(dateFormat),
                                 "Staff": unitReceiptNote.jeneng._createdBy,
+                                "Tempo": item.purchaseOrder.paymentDueDays,
                                 "Tanggal Bon Terima Unit": moment(new Date(unitReceiptNote.date)).format(dateFormat),
                                 "No Bon Terima Unit": unitReceiptNote.no,
                                 "User": unitReceiptNote._createdBy
                             }
                             data.push(_item);
                         }
+                    }
                     
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, data);
@@ -56,6 +59,7 @@ function getRouter() {
                             "No Surat Jalan": "string",
                             "Tanggal Surat Jalan": "string",
                             "Staff": "string",
+                            "Tempo":"string",
                             "Tanggal Bon Terima Unit": "string",
                             "No Bon Terima Unit": "string",
                             "User":"string"
@@ -73,4 +77,3 @@ function getRouter() {
     return router;
 }
 module.exports = getRouter;
-
