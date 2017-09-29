@@ -14,11 +14,21 @@ function getRouter(){
             var edate = request.params.dateTo;
             var staff = request.params.staff;
             var divisi = request.params.divisi;
+
+            var dateFormat = "DD/MM/YYYY";
+                    var dateFormat2 = "DD MMM YYYY";
+                    var locale = 'id-ID';
+                    var moment = require('moment');
+                    moment.locale(locale);
     
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
+ 
+                   
             manager.getDataPODetailStaff(sdate, edate, staff,divisi , offset)
                 .then(docs => {
+
+                    
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
                         response.send(200, result);
@@ -38,11 +48,11 @@ function getRouter(){
                                         "No PR": PO._id.name,
                                         "Nama Barang": PO.nmbarang,
                                         "Supplier": PO.nmsupp,
-                                        "Tgl Terima PO Int": PO.tglpoint,
-                                        "Tgl Terima PO Eks": PO.tglpoeks,
+                                        "Tgl Terima PO Int": moment(new Date(PO.tglpoint)).add(offset, 'h').format(dateFormat),
+                                        "Tgl Terima PO Eks": moment(new Date(PO.tglpoeks)).add(offset, 'h').format(dateFormat),
                                         "Selisih 1": PO.selisih2,
-                                        "Tgl Target Kedatangan": PO.tgltarget,
-                                        "Tgl Kedatangan": PO.tgldatang,
+                                        "Tgl Target Kedatangan": moment(new Date(PO.tgltarget)).add(offset, 'h').format(dateFormat),
+                                        "Tgl Kedatangan": moment(new Date(PO.tgldatang)).add(offset, 'h').format(dateFormat),
                                         "Selisih 2": PO.selisih,
                                         "Unit": PO.unit,                                    }
                                 data.push(item);
