@@ -26,7 +26,7 @@
     "dl-module": "git+https://github.com/danliris/dl-module.git#dev",
     "json2xls": "^0.1.2",
     "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",
-    "moment": "^2.16.0",
+    "moment": "2.16.0",
     "mongo-factory": "^1.0.0",
     "mongodb": "^2.2.5",
     "passport": "^0.3.2",
