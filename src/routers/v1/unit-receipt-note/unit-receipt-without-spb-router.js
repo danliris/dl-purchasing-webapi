@@ -12,11 +12,12 @@ function getRouter() {
         db.get().then(db => {
             var manager = new UnitReceiptNoteManager(db, request.user);
             var unitId = request.params.unitId;
+            var staffName = request.params.staffName;
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             
-            manager.getUnitReceiptWithoutSpb(unitId, dateFrom, dateTo, offset)
+            manager.getUnitReceiptWithoutSpb(unitId, staffName, dateFrom, dateTo, offset)
                 .then(docs => {
                     var dateFormat = "DD/MM/YYYY";
                     var dateFormat2 = "DD MMM YYYY";
@@ -38,7 +39,7 @@ function getRouter() {
                                 "No Surat Jalan": unitReceiptNote.deliveryOrder.no,
                                 "Tanggal Surat Jalan": moment(new Date(unitReceiptNote.deliveryOrder.date)).format(dateFormat),
                                 "Staff": unitReceiptNote.jeneng._createdBy,
-                                "Tempo": item.purchaseOrder.paymentDueDays,
+                                "Tempo": item.purchaseOrder.paymentDueDays + " hari",
                                 "Tanggal Bon Terima Unit": moment(new Date(unitReceiptNote.date)).format(dateFormat),
                                 "No Bon Terima Unit": unitReceiptNote.no,
                                 "User": unitReceiptNote._createdBy
