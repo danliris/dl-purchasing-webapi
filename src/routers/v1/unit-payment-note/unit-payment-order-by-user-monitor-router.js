@@ -50,12 +50,17 @@ function getRouter(){
                                         "Jumlah": PO.items.unitReceiptNote.items.deliveredQuantity,
                                         "Harga Satuan": PO.items.unitReceiptNote.items.pricePerDealUnit,
                                         "Total Harga": PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit,
+                                        "Tgl PR": moment(new Date(PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.date)).add(offset, 'h').format(dateFormat) ,
+                                        "No PR": PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.no,
+                                        "Tgl Bon":moment(new Date(PO.items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
+                                         "No Bon": PO.items.unitReceiptNote.no,
                                         "Tgl Invoice": moment(new Date(PO.invoceDate)).add(offset, 'h').format(dateFormat),
+                                        "No Invoice": PO.invoceNo,
                                         "Jatuh Tempo": moment(new Date(PO.dueDate)).add(offset, 'h').format(dateFormat),
                                         "Supplier": PO.supplier.name,
                                         "Unit": PO.namaUnit,
                                         "Divisi": PO.division.name,
-                                        "No PR": PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.no,                                    
+                                                                            
                                     }
                                 data.push(item);
                             }
@@ -68,17 +73,21 @@ function getRouter(){
                             "Harga Satuan": "String",
                             "Total Harga": "String",
                             "Tgl Invoice": "String",
+                            "No Invoice": "String",
                             "Jatuh Tempo": "String",
                             "Supplier": "String",
                             "Unit": "String",
                             "Divisi": "String",
                             "No PR": "String",
+                            "Tgl PR": "String",
+                            "No Bon": "String",
+                            "Tgl Bon": "String",
                         };
 
 
                         
                         
-                            response.xls(`laporan.xlsx`, data,options);
+                        response.xls(`Laporan Monitoring Surat Perintah Bayar - ${moment(new Date()).add(offset, 'h').format(dateFormat2)}.xlsx`, data, options);
                           
 
                                
