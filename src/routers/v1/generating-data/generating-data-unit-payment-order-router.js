@@ -81,7 +81,8 @@ function getRouter() {
                                     "NOMOR BON TERIMA UNIT": _items.unitReceiptNote.no,
                                     "TANGGAL BON TERIMA UNIT": moment(new Date(_items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
                                     "PRINTED_FLAG": "",
-                                    "USER INPUT": _data._createdBy
+                                    "USER INPUT": _data._createdBy,
+                                    "TERM": _data.paymentMethod
                                 }
                                 data.push(_item);
                             }
@@ -120,7 +121,8 @@ function getRouter() {
                         "NOMOR BON TERIMA UNIT": "string",
                         "TANGGAL BON TERIMA UNIT": "date",
                         "PRINTED_FLAGT": "string",
-                        "USER INPUT": ""
+                        "USER INPUT": "",
+                        "TERM": "string"
                     };
                     if (data.length === 0) {
                         var _item = {
@@ -156,7 +158,8 @@ function getRouter() {
                             "NOMOR BON TERIMA UNIT": "",
                             "TANGGAL BON TERIMA UNIT": "",
                             "PRINTED_FLAG": "",
-                            "USER INPUT": ""
+                            "USER INPUT": "",
+                            "TERM": ""
                         }
                         data.push(_item);
                     }
