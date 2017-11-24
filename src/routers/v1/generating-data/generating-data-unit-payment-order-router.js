@@ -64,7 +64,6 @@ function getRouter() {
                                     "PPH": _data.useVat ? "Ya" : "Tidak",
                                     "JENIS PPH": _data.useVat ? _data.vat.name : "",
                                     "% PPH": _data.useVat ? _data.vat.rate : "",
-                                    "TERM": _data.paymentMethod,
                                     "NOMOR FAKTUR PPH": _data.useVat ? _data.vatNo : "",
                                     "TANGGAL FAKTUR PPH": _data.useVat ? moment(new Date(_data.vatDate)).add(offset, 'h').format(dateFormat) : "",
                                     "NOMOR PO EXTERNAL": _unitReceiptNoteItem.purchaseOrder.purchaseOrderExternal.no,
@@ -82,7 +81,8 @@ function getRouter() {
                                     "NOMOR BON TERIMA UNIT": _items.unitReceiptNote.no,
                                     "TANGGAL BON TERIMA UNIT": moment(new Date(_items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
                                     "PRINTED_FLAG": "",
-                                    "USER INPUT": _data._createdBy
+                                    "USER INPUT": _data._createdBy,
+                                    "TERM": _data.paymentMethod
                                 }
                                 data.push(_item);
                             }
@@ -104,7 +104,6 @@ function getRouter() {
                         "PPH": "string",
                         "JENIS PPH": "string",
                         "% PPH": "string",
-                        "TERM": "string",
                         "NOMOR FAKTUR PPH": "string",
                         "TANGGAL FAKTUR PPH": "date",
                         "NOMOR PO EXTERNAL": "string",
@@ -122,7 +121,8 @@ function getRouter() {
                         "NOMOR BON TERIMA UNIT": "string",
                         "TANGGAL BON TERIMA UNIT": "date",
                         "PRINTED_FLAGT": "string",
-                        "USER INPUT": ""
+                        "USER INPUT": "",
+                        "TERM": "string"
                     };
                     if (data.length === 0) {
                         var _item = {
@@ -141,7 +141,6 @@ function getRouter() {
                             "PPH": "",
                             "JENIS PPH": "",
                             "% PPH": "",
-                            "TERM": "",
                             "NOMOR FAKTUR PPH": "",
                             "TANGGAL FAKTUR PPH": "",
                             "NOMOR PO EXTERNAL": "",
@@ -159,7 +158,8 @@ function getRouter() {
                             "NOMOR BON TERIMA UNIT": "",
                             "TANGGAL BON TERIMA UNIT": "",
                             "PRINTED_FLAG": "",
-                            "USER INPUT": ""
+                            "USER INPUT": "",
+                            "TERM": ""
                         }
                         data.push(_item);
                     }
