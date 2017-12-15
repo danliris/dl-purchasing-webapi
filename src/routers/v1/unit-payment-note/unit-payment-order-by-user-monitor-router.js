@@ -34,14 +34,33 @@ function getRouter(){
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
                         response.send(200, result);
-                    }
+    
+                }
                     else {
 
                              var data = [];
                              var jeneng = "";
+                             var hasil =0;
+                             var hasil2 =0;
                             var index = 0;
                                 for (var PO of docs) {
                                 index++;
+                                if(PO.useIncomeTax==true){
+                                    hasil=(PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit)/10; 
+                                    }else{
+                                        hasil=0;
+                                         }
+
+                                     if(PO.useVat==true){
+                                         hasil2=((PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit)*PO.vat.rate)/100; 
+                                      }else{
+                                         hasil2=0;
+                                            }
+     
+
+
+                                    
+
                                 var item = {
                                         "No": index,
                                         "Tgl SPB": moment(new Date(PO.date)).add(offset, 'h').format(dateFormat),
@@ -49,17 +68,22 @@ function getRouter(){
                                         "Nama Barang": PO.items.unitReceiptNote.items.product.name,
                                         "Jumlah": PO.items.unitReceiptNote.items.deliveredQuantity,
                                         "Harga Satuan": PO.items.unitReceiptNote.items.pricePerDealUnit,
-                                        "Total Harga": PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit,
+                                        "Jumlah Harga": PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit,
+                                        "Ppn": hasil,
+                                        "Total": (PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit)+hasil,
+                                        "Pph": hasil2,
                                         "Tgl PR": moment(new Date(PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.date)).add(offset, 'h').format(dateFormat) ,
                                         "No PR": PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.no,
                                         "Tgl Bon":moment(new Date(PO.items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
-                                         "No Bon": PO.items.unitReceiptNote.no,
+                                        "No Bon": PO.items.unitReceiptNote.no,
                                         "Tgl Invoice": moment(new Date(PO.invoceDate)).add(offset, 'h').format(dateFormat),
                                         "No Invoice": PO.invoceNo,
                                         "Jatuh Tempo": moment(new Date(PO.dueDate)).add(offset, 'h').format(dateFormat),
                                         "Supplier": PO.supplier.name,
                                         "Unit": PO.namaUnit,
                                         "Divisi": PO.division.name,
+                                        "ADM": PO._createdBy,
+                                        "Staff": PO.staff,
                                                                             
                                     }
                                 data.push(item);
@@ -71,7 +95,10 @@ function getRouter(){
                             "Nama Barang": "String",
                             "Jumlah": "String",
                             "Harga Satuan": "String",
-                            "Total Harga": "String",
+                            "Jumlah Harga": "String",
+                            "Ppn": "String",
+                            "Total": "String",
+                            "Pph": "String",
                             "Tgl Invoice": "String",
                             "No Invoice": "String",
                             "Jatuh Tempo": "String",
@@ -82,6 +109,8 @@ function getRouter(){
                             "Tgl PR": "String",
                             "No Bon": "String",
                             "Tgl Bon": "String",
+                            "ADM": "String",
+                            "Staff": "String",
                         };
 
 
