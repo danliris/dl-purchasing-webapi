@@ -16,8 +16,10 @@ var v1PurchaseOrderUnpostedRouter = require('../src/routers/v1/purchase-order/pu
 var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-by-user-router');
 var v1ReportPoCategoryPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-category-router');
 var v1ReportPoUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-router');
+var v1ReportPoStaffKetepatanRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-staff-router');
 var v1ReportPoSubUnitCategoriesPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-category-router');
 var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
+var v1ReportPoSubStaffKetepatanRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-staff-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
 
 // PURCHASE ORDER INTERNAL
@@ -56,7 +58,8 @@ var v1UnitPaymentPriceCorrectionNoteRouter = require('../src/routers/v1/unit-pay
 var v1UnitPaymentQuantityCorrectionNoteByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-quantity-correction-note-by-user-router');
 var v1UnitPaymentQuantityCorrectionReturNoteRouter = require('../src/routers/v1/unit-payment-note/unit-payment-quantity-correction-retur-note-router');
 var v1UnitPaymentQuantityCorrectionNoteRouter = require('../src/routers/v1/unit-payment-note/unit-payment-quantity-correction-note-router');
-var v1UnitPaymentOrderByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-router'); 
+var v1UnitPaymentOrderByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-router');
+var v1UnitPaymentOrderByUserMonitorRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-monitor-router'); 
 var v1UnitPaymentOrderReadAllRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-read-all-data-router');
 var v1UnitPaymentOrderRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-router');
 var v1UnitPaymentQuantityCorrectionNoteMonitoringRouter = require('../src/routers/v1/unit-payment-note/correction-quantity');
@@ -81,7 +84,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1PurchaseRequestPostedRouter().applyRoutes(server,                     "/v1/purchase-requests/posted");
     v1PurchaseRequestPostRouter().applyRoutes(server,                       "/v1/purchase-requests/post");
     v1PurchaseRequestByUserRouter().applyRoutes(server,                     "/v1/purchase-requests/by-user");
-    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring"); 
+    v1PurchaseRequestMonitoringRouter().applyRoutes(server,                 "/v1/purchase-requests/monitoring");
     v1PurchaseRequestByRoleRouter().applyRoutes(server,                     "/v1/purchase-requests/by-role");
     v1PurchaseRequestMonitoringAllUserRouter().applyRoutes(server,          "/v1/purchase-requests/monitoring-all-user");
     v1PurchaseRequestRouter().applyRoutes(server,                           "/v1/purchase-requests"); 
@@ -95,8 +98,10 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1PurchaseOrderByUserRouter().applyRoutes(server,                       "/v1/purchase-orders/by-user");
     v1ReportPoCategoryPeriodeRouter().applyRoutes(server,                   "/v1/purchase-orders/reports/categories");
     v1ReportPoUnitPeriodeRouter().applyRoutes(server,                       "/v1/purchase-orders/reports/units");
+    v1ReportPoStaffKetepatanRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/staffs");
     v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/v1/purchase-orders/reports/units-categories");
     v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subUnits");
+    v1ReportPoSubStaffKetepatanRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subStaffs");
     v1PurchaseOrderRouter().applyRoutes(server,                             "/v1/purchase-orders");
 
     //PURCHASE ORDER INTERNAL
@@ -136,6 +141,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1UnitPaymentQuantityCorrectionReturNoteRouter().applyRoutes(server,    "/v1/unit-payment-orders/corrections/quantities/retur"); 
     v1UnitPaymentQuantityCorrectionNoteRouter().applyRoutes(server,         "/v1/unit-payment-orders/corrections/quantities");
     v1UnitPaymentOrderByUserRouter().applyRoutes(server,                    "/v1/unit-payment-orders/by-user");
+    v1UnitPaymentOrderByUserMonitorRouter().applyRoutes(server,             "/v1/unit-payment-orders/by-user-monitor");
     v1UnitPaymentOrderReadAllRouter().applyRoutes(server,                   "/v1/unit-payment-orders/read-all");
     v1UnitPaymentOrderRouter().applyRoutes(server,                          "/v1/unit-payment-orders");
     v1UnitPaymentQuantityCorrectionNoteMonitoringRouter().applyRoutes(server, "/v1/unit-payment-orders/monitoring/correction-quantity");

@@ -57,7 +57,8 @@ function getRouter() {
                                     "Jumlah": item.quantity,
                                     "Satuan": item.product.uom.unit,
                                     "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
-                                    "Status": status
+                                    "Status": status,
+                                    "Tanggal Diminta Datang Eksternal": moment(new Date(purchaseRequest.poEks.expectedDeliveryDate)).add(offset, 'h').format(dateFormat),
                                 }
                                 data.push(_item);
                             }
@@ -76,6 +77,7 @@ function getRouter() {
                             "Satuan": "string",
                             "Tanggal Diminta Datang": "string",
                             "Status": "string",
+                            "Tanggal Diminta Datang Eksternal": "string"
                         };
                         response.xls(`Monitoring Purchase Request - ${moment(new Date()).format(dateFormat2)}.xlsx`, data, options);
 

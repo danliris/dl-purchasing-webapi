@@ -23,9 +23,10 @@ function getRouter() {
             var state = parseInt(request.params.state);
             var createdBy = request.user.username;
             var budgetId = request.params.budgetId;
+            var staffName = request.params.staffName;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             // manager.getDataPOIntMonitoring(unitId, categoryId, dateFrom, dateTo, "", offset)
-            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", offset)
+            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, staffName, "", offset)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
