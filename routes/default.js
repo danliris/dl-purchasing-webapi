@@ -91,10 +91,10 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
     v1PurchaseOrderExternalPostRouter().applyRoutes(server,                 "/purchase-orders/externals/post");
     v1PurchaseOrderExternalsUnpostedRouter().applyRoutes(server,            "/purchase-orders/externals/posted"); 
     v1PurchaseOrderExternalByUserRouter().applyRoutes(server,               "/purchase-orders/externals/by-user");
-    v1PurchaseOrderExternalRouter().applyRoutes(server,                     "/purchase-orders/externals");
     v1PurchaseOrderExternalCancelRouter().applyRoutes(server,               "/purchase-orders/externals/cancel");
     v1PurchaseOrderExternalUnpostRouter().applyRoutes(server,               "/purchase-orders/externals/unpost");
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server,                "/purchase-orders/externals/close");
+    v1PurchaseOrderExternalRouter().applyRoutes(server,                     "/purchase-orders-externals");
     //DELIVERY ORDER
     v1DOMonitoringByUserRouter().applyRoutes(server,                        "/delivery-orders/monitoring/by-user");
     v1DOMonitoringRouter().applyRoutes(server,                              "/delivery-orders/monitoring");
