@@ -72,7 +72,7 @@ function getRouter(){
                                         "Ppn": hasil,
                                         "Total": (PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit)+hasil,
                                         "Pph": hasil2,
-                                        "Tgl PR": moment(new Date(PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.date)).add(offset, 'h').format(dateFormat) ,
+                                        "Tgl PR": moment(new Date(PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.date)).format(dateFormat) ,
                                         "No PR": PO.items.unitReceiptNote.items.purchaseOrder.purchaseRequest.no,
                                         "Tgl Bon":moment(new Date(PO.items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
                                         "No Bon": PO.items.unitReceiptNote.no,
