@@ -48,6 +48,10 @@ function getRouter() {
                                         break;
                                     }
                                 }
+                                var Tempo= _unitReceiptNoteItem.purchaseOrder.purchaseOrderExternal.paymentDueDays;
+                                var JatuhTempo = new Date(_items.unitReceiptNote.date);
+                                                JatuhTempo.setDate(JatuhTempo.getDate() + Tempo);
+                                var TgJT= moment(new Date(JatuhTempo)).add(offset, 'h').format(dateFormat);
                                 var _item = {
                                     "NOMOR NOTA KREDIT": _data.no,
                                     "TANGGAL NOTA KREDIT": moment(new Date(_data.date)).add(offset, 'h').format(dateFormat),
@@ -56,7 +60,7 @@ function getRouter() {
                                     "KATEGORI": _data.category.name,
                                     "NOMOR INVOICE": _data.invoceNo,
                                     "TANGGAL INVOICE": moment(new Date(_data.invoceDate)).add(offset, 'h').format(dateFormat),
-                                    "TANGGAL JATUH TEMPO": moment(new Date(_data.dueDate)).add(offset, 'h').format(dateFormat),
+                                    "TANGGAL JATUH TEMPO":TgJT,
                                     "KETERANGAN": _data.remark,
                                     "PPN": _data.useIncomeTax ? "Ya" : "Tidak",
                                     "NOMOR FAKTUR PAJAK": _data.useIncomeTax ? _data.incomeTaxNo : "",
