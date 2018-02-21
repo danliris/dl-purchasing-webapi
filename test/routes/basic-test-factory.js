@@ -31,7 +31,7 @@ function getBasicTest(opt) {
     it(`#01. get list of accounts - [GET]${uri}`, function(done) {
         request
             .get(uri)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(200)
             .expect("Content-Type", "application/json")
@@ -51,7 +51,7 @@ function getBasicTest(opt) {
     it(`#02. get data by unknown id - [GET]${uri}/:id`, function(done) {
         request
             .get(`${uri}/${new ObjectId()}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(404)
             .end(function(err, response) {
@@ -67,7 +67,7 @@ function getBasicTest(opt) {
         request
             .post(uri)
             .send({})
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(400)
             .end(function(err, response) {
@@ -93,7 +93,7 @@ function getBasicTest(opt) {
                 request
                     .post(uri)
                     .send(data)
-                    .set("authorization", `JWT ${jwt}`)
+                    .set("authorization", `Bearer ${jwt}`)
                     .set("Accept", "application/json")
                     .expect(201)
                     .expect("Content-Type", "application/json")
@@ -122,7 +122,7 @@ function getBasicTest(opt) {
     it(`#05. get created data from header.location [GET]${uri}/:id`, function(done) {
         request
             .get(createdDataLocation)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(200)
             .expect("Content-Type", "application/json")
@@ -148,7 +148,7 @@ function getBasicTest(opt) {
         request
             .put(`${uri}/${new ObjectId()}`)
             .send(createdData)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(404)
             .end(function(err, response) {
@@ -164,7 +164,7 @@ function getBasicTest(opt) {
         request
             .put(`${uri}/${createdData._id}`)
             .send(createdData)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(204)
             .end(function(err, response) {
@@ -179,7 +179,7 @@ function getBasicTest(opt) {
     it(`#08. get updated data - [GET]/${uri}/:id`, function(done) {
         request
             .get(`${uri}/${createdData._id}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(200)
             .expect("Content-Type", "application/json")
@@ -210,7 +210,7 @@ function getBasicTest(opt) {
     it(`#09. get list of data with keyword - [GET]${uri}?keyword`, function(done) {
         request
             .get(`${uri}?keyword=${createdData[keyword]}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(200)
             .expect("Content-Type", "application/json")
@@ -242,7 +242,7 @@ function getBasicTest(opt) {
     it(`#10. delete created data with unknown id - [DELETE]/${uri}/:id`, function(done) {
         request
             .delete(`${uri}/${new ObjectId()}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(404)
             .end(function(err, response) {
@@ -257,7 +257,7 @@ function getBasicTest(opt) {
     it(`#11. delete created data - [DELETE]${uri}/:id`, function(done) {
         request
             .delete(`${uri}/${createdData._id}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(204)
             .end(function(err, response) {
@@ -272,7 +272,7 @@ function getBasicTest(opt) {
     it(`#12. get deleted data - [GET]${uri}/:id`, function(done) {
         request
             .get(createdDataLocation)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(404)
             .end(function(err, response) {
@@ -287,7 +287,7 @@ function getBasicTest(opt) {
     it(`#14. get list of accounts with keyword - [GET] ${uri}?keyword`, function(done) {
         request
             .get(`${uri}?keyword=${createdData[keyword]}`)
-            .set("authorization", `JWT ${jwt}`)
+            .set("authorization", `Bearer ${jwt}`)
             .set("Accept", "application/json")
             .expect(200)
             .expect("Content-Type", "application/json")
