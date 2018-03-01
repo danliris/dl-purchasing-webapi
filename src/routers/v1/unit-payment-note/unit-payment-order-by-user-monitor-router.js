@@ -87,6 +87,8 @@ function getRouter(){
                                         "ADM": PO._createdBy,
                                         "Staff": PO.staff,
                                         "Mata Uang": PO.matauang,
+                                        "Kode Kategori": PO.kdkategori,
+                                        "Kategori": PO.kategori,
                                                                             
                                     }
                                 data.push(item);
@@ -117,6 +119,8 @@ function getRouter(){
                             "ADM": "String",
                             "Staff": "String",
                             "Mata Uang": "String",
+                            "Kode Kategori": "String",
+                            "Kategori": "String",
                         };
 
 
