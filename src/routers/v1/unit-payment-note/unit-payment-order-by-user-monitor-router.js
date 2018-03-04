@@ -66,6 +66,7 @@ function getRouter(){
                                         "Tgl SPB": moment(new Date(PO.date)).add(offset, 'h').format(dateFormat),
                                         "No SPB": PO.no,
                                         "Nama Barang": PO.items.unitReceiptNote.items.product.name,
+                                        "Satuan": PO.satuan,
                                         "Jumlah": PO.items.unitReceiptNote.items.deliveredQuantity,
                                         "Harga Satuan": PO.items.unitReceiptNote.items.pricePerDealUnit,
                                         "Jumlah Harga": PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit,
@@ -79,11 +80,15 @@ function getRouter(){
                                         "Tgl Invoice": moment(new Date(PO.invoceDate)).add(offset, 'h').format(dateFormat),
                                         "No Invoice": PO.invoceNo,
                                         "Jatuh Tempo": moment(new Date(PO.dueDate)).add(offset, 'h').format(dateFormat),
+                                        "Code Supplier": PO.codesupplier,
                                         "Supplier": PO.supplier.name,
                                         "Unit": PO.namaUnit,
                                         "Divisi": PO.division.name,
                                         "ADM": PO._createdBy,
                                         "Staff": PO.staff,
+                                        "Mata Uang": PO.matauang,
+                                        "Kode Kategori": PO.kdkategori,
+                                        "Kategori": PO.kategori,
                                                                             
                                     }
                                 data.push(item);
@@ -93,6 +98,7 @@ function getRouter(){
                             "Tgl SPB": "String",
                             "No SPB": "String",
                             "Nama Barang": "String",
+                            "Satuan": "String",
                             "Jumlah": "String",
                             "Harga Satuan": "String",
                             "Jumlah Harga": "String",
@@ -102,6 +108,7 @@ function getRouter(){
                             "Tgl Invoice": "String",
                             "No Invoice": "String",
                             "Jatuh Tempo": "String",
+                            "Code Supplier": "String",
                             "Supplier": "String",
                             "Unit": "String",
                             "Divisi": "String",
@@ -111,6 +118,9 @@ function getRouter(){
                             "Tgl Bon": "String",
                             "ADM": "String",
                             "Staff": "String",
+                            "Mata Uang": "String",
+                            "Kode Kategori": "String",
+                            "Kategori": "String",
                         };
 
 
