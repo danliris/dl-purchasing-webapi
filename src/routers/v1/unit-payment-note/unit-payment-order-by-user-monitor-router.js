@@ -58,7 +58,9 @@ function getRouter(){
                                             }
      
 
-
+                                var Tempo= PO.tgltambah;
+                                var JatuhTempo = new Date(PO.items.unitReceiptNote.date);
+                                              JatuhTempo.setDate(JatuhTempo.getDate() + Tempo);
                                     
 
                                 var item = {
@@ -79,7 +81,7 @@ function getRouter(){
                                         "No Bon": PO.items.unitReceiptNote.no,
                                         "Tgl Invoice": moment(new Date(PO.invoceDate)).add(offset, 'h').format(dateFormat),
                                         "No Invoice": PO.invoceNo,
-                                        "Jatuh Tempo": moment(new Date(PO.dueDate)).add(offset, 'h').format(dateFormat),
+                                        "Jatuh Tempo": moment(new Date(PO.dueDate || JatuhTempo)).add(offset, 'h').format(dateFormat),
                                         "Code Supplier": PO.codesupplier,
                                         "Supplier": PO.supplier.name,
                                         "Unit": PO.namaUnit,
@@ -89,6 +91,7 @@ function getRouter(){
                                         "Mata Uang": PO.matauang,
                                         "Kode Kategori": PO.kdkategori,
                                         "Kategori": PO.kategori,
+                                        "NoSeriPPN": PO.noserippn,
                                                                             
                                     }
                                 data.push(item);
@@ -121,12 +124,13 @@ function getRouter(){
                             "Mata Uang": "String",
                             "Kode Kategori": "String",
                             "Kategori": "String",
+                            "NoSeriPPN": "String",
                         };
 
 
                         
                         
-                        response.xls(`Laporan Monitoring Surat Perintah Bayar - ${moment(new Date()).add(offset, 'h').format(dateFormat2)}.xlsx`, data, options);
+                      response.xls(`Laporan Monitoring Surat Perintah Bayar  ${moment(new Date(dateFrom)).add(offset, 'h').format(dateFormat)} - ${moment(new Date(dateTo)).add(offset, 'h').format(dateFormat)}.xlsx`, data, options);
                           
 
                                
