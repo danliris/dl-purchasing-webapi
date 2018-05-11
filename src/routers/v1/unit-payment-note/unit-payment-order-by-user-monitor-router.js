@@ -11,12 +11,11 @@ function getRouter(){
         db.get().then(db => {
             var manager = new PurchaseOrderManager(db, request.user);
             var unitId = request.params.unitId;
-            var PRNo = request.params.PRNo;
+    
             var supplierId = request.params.supplierId;
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
-            var staffName = request.params.staffName;
-            var noSpb = request.params.noSpb;
+     
             var dateFormat = "DD/MM/YYYY";
                     var dateFormat2 = "DD MMM YYYY";
                     var locale = 'id-ID';
@@ -25,9 +24,8 @@ function getRouter(){
     
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
- 
                    
-            manager.getDataMonitorSpb(unitId,PRNo,noSpb,supplierId,dateFrom,dateTo,staffName , offset)
+            manager.getDataMonitorSpb(unitId,supplierId,dateFrom,dateTo , offset)
                 .then(docs => {
 
                     
@@ -44,7 +42,7 @@ function getRouter(){
                              var hasil2 =0;
                             var index = 0;
                                 for (var PO of docs) {
-                                index++;
+                                 index++;
                                 if(PO.useIncomeTax==true){
                                     hasil=(PO.items.unitReceiptNote.items.deliveredQuantity*PO.items.unitReceiptNote.items.pricePerDealUnit)/10; 
                                     }else{
@@ -83,11 +81,11 @@ function getRouter(){
                                         "No Invoice": PO.invoceNo,
                                         "Jatuh Tempo": moment(new Date(PO.dueDate || JatuhTempo)).add(offset, 'h').format(dateFormat),
                                         "Code Supplier": PO.codesupplier,
-                                        "Supplier": PO.supplier.name,
+                                        "Supplier": PO.suppliernm,
                                         "Unit": PO.namaUnit,
                                         "Divisi": PO.division.name,
                                         "ADM": PO._createdBy,
-                                        "Staff": PO.staff,
+                            
                                         "Mata Uang": PO.matauang,
                                         "Kode Kategori": PO.kdkategori,
                                         "Kategori": PO.kategori,
@@ -120,7 +118,7 @@ function getRouter(){
                             "No Bon": "String",
                             "Tgl Bon": "String",
                             "ADM": "String",
-                            "Staff": "String",
+                     
                             "Mata Uang": "String",
                             "Kode Kategori": "String",
                             "Kategori": "String",
@@ -130,9 +128,9 @@ function getRouter(){
 
                         
                         
-                      response.xls(`Laporan Monitoring Surat Perintah Bayar  ${moment(new Date(dateFrom)).add(offset, 'h').format(dateFormat)} - ${moment(new Date(dateTo)).add(offset, 'h').format(dateFormat)}.xlsx`, data, options);
+                     // response.xls(`Laporan Monitoring Surat Perintah Bayar  ${moment(new Date(dateFrom)).add(offset, 'h').format(dateFormat)} - ${moment(new Date(dateTo)).add(offset, 'h').format(dateFormat)}.xlsx`, data, options);
                           
-
+response.xls(`Laporan Monitoring Surat Perintah Bayar.xlsx`, data, options);
                                
                     }
                 }).catch(e => {
