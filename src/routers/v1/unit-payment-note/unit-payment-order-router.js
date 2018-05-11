@@ -2,7 +2,7 @@ const apiVersion = '1.0.0';
 var Manager = require("dl-module").managers.purchasing.UnitPaymentOrderManager;
 var resultFormatter = require("../../../result-formatter");
 var db = require("../../../db");
-
+const passport = require("../../../passports/jwt-passport");
 var JwtRouterFactory = require("../../jwt-router-factory");
 
 var handlePdfRequest = function (request, response, next) {
@@ -86,6 +86,45 @@ function getRouter() {
         }
     };
     route.handlers.push(handlePdfRequest);
+
+    const getManager = (user) => {
+        return db.get()
+            .then((db) => {
+                return Promise.resolve(new Manager(db, user));
+            });
+    }
+
+    router.put("/update/position", passport, (request, response, next) => {
+        let user = request.user;
+        let data = request.body;
+
+        getManager(user)
+            .then((manager) => {
+                return manager.updatePosition(data)
+                    .then((res) => {
+                        let result;
+                        if (!res) {
+                            result = resultFormatter.fail(apiVersion, 404, new Error("data not found"));
+                            return Promise.resolve(result);
+                        }
+                        else {
+                            result = resultFormatter.ok(apiVersion, 204);
+                            return Promise.resolve(result);
+                        }
+                    });
+            })
+            .then((result) => {
+                response.send(result.statusCode, result);
+            })
+            .catch((e) => {
+                let statusCode = 500;
+                if (e.name === "ValidationError")
+                    statusCode = 400;
+                let error = resultFormatter.fail(apiVersion, statusCode, e);
+                response.send(statusCode, error);
+            });
+    });
+
     return router;
 }
 
