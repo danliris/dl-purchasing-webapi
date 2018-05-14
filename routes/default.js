@@ -98,6 +98,7 @@ module.exports = function (server) {
     v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
     v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders-externals/common");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders-externals");
     //DELIVERY ORDER
     v1DOMonitoringByUserRouter().applyRoutes(server, "/delivery-orders/monitoring/by-user");
