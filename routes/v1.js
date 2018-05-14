@@ -21,6 +21,7 @@ var v1ReportPoSubUnitCategoriesPeriodeRouter = require('../src/routers/v1/purcha
 var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1ReportPoSubStaffKetepatanRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-staff-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
+var v1POIntMonitoringAllUserRouter = require('../src/routers/v1/purchase-order/purchase-order-internal-monitoring-all-user-router');
 
 // PURCHASE ORDER INTERNAL
 var v1POIntMonitoringByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-internal-monitoring-by-user-router');
@@ -107,6 +108,7 @@ var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter =require ('../src/r
 
     //PURCHASE ORDER INTERNAL
     v1POIntMonitoringByUserRouter().applyRoutes(server,                     "/v1/purchase-orders-internal/monitoring/by-user");
+    v1POIntMonitoringAllUserRouter().applyRoutes(server,                     "/v1/purchase-orders-internal/monitoring-not-posted");
 
     v1ReportPoSupplierPeriodeRouter().applyRoutes(server,                   "/v1/purchase-orders/reports/suppliers");
     v1ReportPoSubDetailPoExtPeriodeRouter().applyRoutes(server,             "/v1/purchase-orders/reports/suppliers-po-external");
