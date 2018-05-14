@@ -13,7 +13,6 @@ function getRouter() {
             var manager = new UnitReceiptNoteManager(db, request.user);
 
             var no = request.params.no;
-            var PRNo = request.params.PRNo;
             var supplierId = request.params.supplierId;
             var categoryId = request.params.categoryId;
             var unitId = request.params.unitId;
@@ -22,7 +21,7 @@ function getRouter() {
             var createdBy = request.user.username;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getUnitReceiptNotes(no, PRNo, unitId, categoryId, supplierId, dateFrom, dateTo, offset, createdBy)
+            manager.getUnitReceiptNotes(no, unitId, categoryId, supplierId, dateFrom, dateTo, offset, createdBy)
                 .then(docs => {
                     var dateFormat = "DD/MM/YYYY";
                     var dateFormat2 = "DD MMM YYYY";

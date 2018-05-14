@@ -12,7 +12,7 @@ function getRouter(){
             var manager = new UnitPaymentQuantityCorrectionNoteManager(db, request.user);
 
             var id = request.params.id;
-            manager.pdfReturNote(id, request.timezoneOffset)
+            manager.pdfReturNote(id)
                 .then(docBinary => {
                     // var base64 = 'data:application/pdf;base64,' + docBinary.toString('base64')
                     manager.getSingleById(id)

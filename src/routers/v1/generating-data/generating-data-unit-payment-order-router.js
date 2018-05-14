@@ -18,19 +18,12 @@ function getRouter() {
             moment.locale(locale);
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
-            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             var filter = {};
-            var qDateFrom = new Date(dateFrom);
-            qDateFrom.setHours(qDateFrom.getHours()-offset);
-
-            var qDateTo = new Date(dateTo);
-            qDateTo.setHours(qDateTo.getHours()-offset);
-
             if (dateFrom && dateTo) {
                 filter = {
                     date: {
-                        $gte: qDateFrom,
-                        $lte: qDateTo
+                        $gte: new Date(dateFrom),
+                        $lte: new Date(dateTo)
                     }
                 };
             }
@@ -48,28 +41,24 @@ function getRouter() {
                                         break;
                                     }
                                 }
-                                var Tempo= _unitReceiptNoteItem.purchaseOrder.purchaseOrderExternal.paymentDueDays;
-                                var JatuhTempo = new Date(_items.unitReceiptNote.date);
-                                                JatuhTempo.setDate(JatuhTempo.getDate() + Tempo);
-                                var TgJT= moment(new Date(JatuhTempo)).add(offset, 'h').format(dateFormat);
                                 var _item = {
                                     "NOMOR NOTA KREDIT": _data.no,
-                                    "TANGGAL NOTA KREDIT": moment(new Date(_data.date)).add(offset, 'h').format(dateFormat),
+                                    "TANGGAL NOTA KREDIT": moment(new Date(_data.date)).format(dateFormat),
                                     "KODE SUPPLIER": _data.supplier.code,
                                     "NAMA SUPPLIER": _data.supplier.name,
                                     "KATEGORI": _data.category.name,
                                     "NOMOR INVOICE": _data.invoceNo,
-                                    "TANGGAL INVOICE": moment(new Date(_data.invoceDate)).add(offset, 'h').format(dateFormat),
-                                    "TANGGAL JATUH TEMPO":TgJT,
+                                    "TANGGAL INVOICE": moment(new Date(_data.invoceDate)).format(dateFormat),
+                                    "TANGGAL JATUH TEMPO": moment(new Date(_data.dueDate)).format(dateFormat),
                                     "KETERANGAN": _data.remark,
                                     "PPN": _data.useIncomeTax ? "Ya" : "Tidak",
                                     "NOMOR FAKTUR PAJAK": _data.useIncomeTax ? _data.incomeTaxNo : "",
-                                    "TANGGAL FAKTUR PAJAK": _data.useIncomeTax ? moment(new Date(_data.incomeTaxDate)).add(offset, 'h').format(dateFormat) : "",
+                                    "TANGGAL FAKTUR PAJAK": _data.useIncomeTax ? moment(new Date(_data.incomeTaxDate)).format(dateFormat) : "",
                                     "PPH": _data.useVat ? "Ya" : "Tidak",
                                     "JENIS PPH": _data.useVat ? _data.vat.name : "",
                                     "% PPH": _data.useVat ? _data.vat.rate : "",
                                     "NOMOR FAKTUR PPH": _data.useVat ? _data.vatNo : "",
-                                    "TANGGAL FAKTUR PPH": _data.useVat ? moment(new Date(_data.vatDate)).add(offset, 'h').format(dateFormat) : "",
+                                    "TANGGAL FAKTUR PPH": _data.useVat ? moment(new Date(_data.vatDate)).format(dateFormat) : "",
                                     "NOMOR PO EXTERNAL": _unitReceiptNoteItem.purchaseOrder.purchaseOrderExternal.no,
                                     "NOMOR PURCHASE REQUEST": _unitReceiptNoteItem.purchaseOrder.purchaseRequest.no,
                                     "NOMOR ACCOUNT": "",
@@ -83,10 +72,9 @@ function getRouter() {
                                     "RATE": _unitReceiptNoteItem.currency.rate,
                                     "HARGA TOTAL BARANG": _unitReceiptNoteItem.pricePerDealUnit * _unitReceiptNoteItem.deliveredQuantity,
                                     "NOMOR BON TERIMA UNIT": _items.unitReceiptNote.no,
-                                    "TANGGAL BON TERIMA UNIT": moment(new Date(_items.unitReceiptNote.date)).add(offset, 'h').format(dateFormat),
+                                    "TANGGAL BON TERIMA UNIT": moment(new Date(_items.unitReceiptNote.date)).format(dateFormat),
                                     "PRINTED_FLAG": "",
-                                    "USER INPUT": _data._createdBy,
-                                    "TERM": _data.paymentMethod
+                                    "USER INPUT": _data._createdBy
                                 }
                                 data.push(_item);
                             }
@@ -125,8 +113,7 @@ function getRouter() {
                         "NOMOR BON TERIMA UNIT": "string",
                         "TANGGAL BON TERIMA UNIT": "date",
                         "PRINTED_FLAGT": "string",
-                        "USER INPUT": "",
-                        "TERM": "string"
+                        "USER INPUT": ""
                     };
                     if (data.length === 0) {
                         var _item = {
@@ -162,15 +149,14 @@ function getRouter() {
                             "NOMOR BON TERIMA UNIT": "",
                             "TANGGAL BON TERIMA UNIT": "",
                             "PRINTED_FLAG": "",
-                            "USER INPUT": "",
-                            "TERM": ""
+                            "USER INPUT": ""
                         }
                         data.push(_item);
                     }
                     if (dateFrom && dateTo) {
                         response.xls(`Laporan Nota Kredit -  ${moment(new Date(dateFrom)).format("DD MMM YYYY")} -  ${moment(new Date(dateTo)).format("DD MMM YYYY")}.xlsx`, data, options);
                     } else {
-                        response.xls(`Laporan Nota Kredit -  ${moment(new Date()).add(offset, 'h').format("DD MMM YYYY")}.xlsx`, data, options);
+                        response.xls(`Laporan Nota Kredit -  ${moment(new Date()).format("DD MMM YYYY")}.xlsx`, data, options);
                     }
                 })
                 .catch(e => {

@@ -5,14 +5,14 @@ var resultFormatter = require("../../../result-formatter");
 const apiVersion = '1.0.0';
 var passport = require('../../../passports/jwt-passport');
 
-function getRouter() {
+function getRouter(){
     var router = new Router();
     var handlePdfRequest = function (request, response, next) {
         db.get().then(db => {
             var manager = new UnitPaymentPriceCorrectionNoteManager(db, request.user);
 
             var id = request.params.id;
-            manager.pdfReturNote(id, request.timezoneOffset)
+            manager.pdfReturNote(id)
                 .then(docBinary => {
                     // var base64 = 'data:application/pdf;base64,' + docBinary.toString('base64')
                     manager.getSingleById(id)

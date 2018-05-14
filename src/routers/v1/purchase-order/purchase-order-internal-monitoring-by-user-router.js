@@ -23,10 +23,8 @@ function getRouter() {
             var state = parseInt(request.params.state);
             var createdBy = request.user.username;
             var budgetId = request.params.budgetId;
-            var staffName = request.params.staffName;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
-            // manager.getDataPOIntMonitoring(unitId, categoryId, dateFrom, dateTo, "", offset)
-            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, staffName, "", offset)
+            manager.getDataPOIntMonitoring(unitId, categoryId, PODLNo, PRNo, supplierId, dateFrom, dateTo, state, budgetId, "", offset, createdBy)
                 .then(docs => {
 
                     var dateFormat = "DD/MM/YYYY";
@@ -39,53 +37,50 @@ function getRouter() {
                     var index = 0;
                     for (var PO of docs) {
                         for (var item of PO.items) {
-                             index++;
-                            // if (item.fulfillments.length > 0) {
-                            //     for (var fulfillment of item.fulfillments) {
-                                    
+                            if (item.fulfillments.length > 0) {
+                                for (var fulfillment of item.fulfillments) {
+                                    index++;
 
-                            //         var _correctionNo = "-";
-                            //         var _correctionPriceTotal = "0";
-                            //         var _correctionDate = "-";
-                            //         var _correctionRemark = "-";
+                                    var _correctionNo = "-";
+                                    var _correctionPriceTotal = "0";
+                                    var _correctionDate = "-";
+                                    var _correctionRemark = "-";
 
-                            //         if (fulfillment.correction) {
-                            //             var i = 1;
-                            //             _correctionNo = "";
-                            //             _correctionPriceTotal = "";
-                            //             _correctionDate = "";
-                            //             _correctionRemark = "";
-                            //             for (var correction of fulfillment.correction) {
-                            //                 _correctionNo = `${_correctionNo}${i}. ${correction.correctionNo}\n`;
-                            //                 _correctionPriceTotal = `${_correctionPriceTotal}${i}. ${correction.correctionPriceTotal.toLocaleString()}\n`;
-                            //                 _correctionDate = `${_correctionDate}${i}. ${moment(new Date(correction.correctionDate)).add(offset, 'h').format(dateFormat)}\n`;
-                            //                 _correctionRemark = `${_correctionRemark}${i}. ${correction.correctionRemark}\n`;
-                            //                 i++;
-                            //             }
-                            //         }
+                                    if (fulfillment.correction) {
+                                        var i = 1;
+                                        _correctionNo = "";
+                                        _correctionPriceTotal = "";
+                                        _correctionDate = "";
+                                        _correctionRemark = "";
+                                        for (var correction of fulfillment.correction) {
+                                            _correctionNo = `${_correctionNo}${i}. ${correction.correctionNo}\n`;
+                                            _correctionPriceTotal = `${_correctionPriceTotal}${i}. ${correction.correctionPriceTotal.toLocaleString()}\n`;
+                                            _correctionDate = `${_correctionDate}${i}. ${moment(new Date(correction.correctionDate)).add(offset, 'h').format(dateFormat)}\n`;
+                                            _correctionRemark = `${_correctionRemark}${i}. ${correction.correctionRemark}\n`;
+                                            i++;
+                                        }
+                                    }
 
-                            //         var _item = {
-                            //             "No" : index,
-                            //             "Divisi": PO.purchaseRequest.unit.division.name,
-                            //             "Nama Barang": item.product.name,
-                            //             "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
-                            //             "Satuan Barang": item.dealUom.unit ? item.dealUom.unit : "-",
-                            //             "Unit": PO.unit.name,
-                            //             "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
-                            //             "No Purchase Request": PO.purchaseRequest.no,
-                            //             "Kategori": PO.category.name,
-                            //             "Budget": PO.purchaseRequest.budget.name,
-                            //             "Tanggal Diminta Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
-                            //             "Staff": PO._createdBy,
-                            //             "Status": PO.status ? PO.status.label : "-"
-                            //         }
-                            //         data.push(_item);
-                            //     }
-                            // }
-                            // else {
-                                // index++;
+                                    var _item = {
+                                        "Divisi": PO.purchaseRequest.unit.division.name,
+                                        "Nama Barang": item.product.name,
+                                        "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
+                                        "Satuan Barang": item.dealUom.unit ? item.dealUom.unit : "-",
+                                        "Unit": PO.unit.name,
+                                        "Tanggal Purchase Request": moment(new Date(PO.purchaseRequest.date)).format(dateFormat),
+                                        "No Purchase Request": PO.purchaseRequest.no,
+                                        "Kategori": PO.category.name,
+                                        "Budget": PO.purchaseRequest.budget.name,
+                                        "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
+                                        "Staff": PO._createdBy,
+                                        "Status": PO.status ? PO.status.label : "-"
+                                    }
+                                    data.push(_item);
+                                }
+                            }
+                            else {
+                                index++;
                                 var _item = {
-                                    "No" : index,
                                     "Divisi": PO.purchaseRequest.unit.division.name,
                                     "Nama Barang": item.product.name,
                                     "Jumlah Barang": item.dealQuantity ? item.dealQuantity : 0,
@@ -95,12 +90,12 @@ function getRouter() {
                                     "No Purchase Request": PO.purchaseRequest.no,
                                     "Kategori": PO.category.name,
                                     "Budget": PO.purchaseRequest.budget.name,
-                                    "Tanggal Diminta Datang": PO.purchaseOrderExternal.expectedDeliveryDate ? moment(new Date(PO.purchaseOrderExternal.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
+                                    "Tanggal Diminta Datang": moment(new Date(PO.purchaseRequest.expectedDeliveryDate)).format(dateFormat),
                                     "Staff": PO._createdBy,
                                     "Status": PO.status ? PO.status.label : "-"
                                 }
                                 data.push(_item);
-                            // }
+                            }
                         }
                     }
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
@@ -109,7 +104,6 @@ function getRouter() {
                     }
                     else {
                         var options = {
-                            "No" : "number",
                             "Divisi": "string",
                             "Unit": "string",
                             "Nama Barang": "string",

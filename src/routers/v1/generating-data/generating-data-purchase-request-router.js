@@ -30,7 +30,7 @@ function getRouter() {
             
             if (dateFrom && dateTo) {
                 filter = {
-                    _createdDate: {
+                    date: {
                         $gte: qDateFrom,
                         $lte: qDateTo
                     }

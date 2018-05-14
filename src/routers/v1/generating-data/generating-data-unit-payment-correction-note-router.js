@@ -77,9 +77,7 @@ function getRouter() {
                                 "HARGA TOTAL BARANG": item.priceTotal,
                                 "NOMOR BON TERIMA UNIT": unitReceiptNote.no,
                                 "TANGGAL BON TERIMA UNIT": moment(new Date(unitReceiptNote.date)).format(dateFormat),
-                                "USER INPUT": _data._createdBy,
-                                "PPN": _data.useIncomeTax ? "Ya" : "Tidak",
-                                "PPH": _data.useVat ? "Ya" : "Tidak"
+                                "USER INPUT": _data._createdBy
                             }
                             data.push(_item);
                         }
@@ -113,9 +111,7 @@ function getRouter() {
                         "HARGA TOTAL BARANG": "number",
                         "NOMOR BON TERIMA UNIT": "string",
                         "TANGGAL BON TERIMA UNIT": "date",
-                        "USER INPUT": "",
-                        "PPN": "string",
-                        "PPH": "string"
+                        "USER INPUT": ""
                     };
 
                     if (data.length === 0) {
@@ -148,9 +144,7 @@ function getRouter() {
                             "HARGA TOTAL BARANG": "",
                             "NOMOR BON TERIMA UNIT": "",
                             "TANGGAL BON TERIMA UNIT": "",
-                            "USER INPUT": "",
-                            "PPN": "",
-                            "PPH":""
+                            "USER INPUT": ""
                         }
                         data.push(_item);
                     }
