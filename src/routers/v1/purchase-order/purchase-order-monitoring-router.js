@@ -61,6 +61,8 @@ function getRouter() {
                                             i++;
                                         }
                                     }
+                                    var JatuhTempo = new Date(fulfillment.unitReceiptNoteDate);
+                                              JatuhTempo.setDate(JatuhTempo.getDate() + (PO.purchaseOrderExternal.paymentDueDays));
 
                                     var _item = {
                                         "No": index,
@@ -96,7 +98,7 @@ function getRouter() {
                                         "Tanggal Nota Intern": fulfillment.interNoteDate ? moment(new Date(fulfillment.interNoteDate)).add(offset, 'h').format(dateFormat) : "-",
                                         "No Nota Intern": fulfillment.interNoteNo ? fulfillment.interNoteNo : "-",
                                         "Nilai Nota Intern": fulfillment.interNoteValue ? fulfillment.interNoteValue : 0,
-                                        "Tanggal Jatuh Tempo": fulfillment.interNoteDueDate ? moment(new Date(fulfillment.interNoteDueDate)).add(offset, 'h').format(dateFormat) : "-",
+                                        "Tanggal Jatuh Tempo": moment(new Date(JatuhTempo)).add(offset, 'h').format(dateFormat),
                                         "Tanggal PPN": fulfillment.ppnDate ? moment(new Date(fulfillment.ppnDate)).add(offset, 'h').format(dateFormat) : "-",
                                         "No PPN": fulfillment.ppnNo ? fulfillment.ppnNo : "-",
                                         "Nilai PPN": fulfillment.ppnValue ? fulfillment.ppnValue : 0,
@@ -151,6 +153,7 @@ function getRouter() {
                                     "No Nota Intern": "-",
                                     "Nilai Nota Intern": 0,
                                     "Tanggal Jatuh Tempo": "-",
+                                    //"Tanggal Jatuh Tempo": moment(new Date(JatuhTempo)).add(offset, 'h').format(dateFormat),
                                     "Tanggal PPN": "-",
                                     "No PPN": "-",
                                     "Nilai PPN": 0,
