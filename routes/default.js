@@ -50,6 +50,7 @@ var v1UnitPaymentQuantityCorrectionNoteRouter = require('../src/routers/v1/unit-
 var v1UnitPaymentOrderByUserRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-by-user-router');
 var v1UnitPaymentOrderReadAllRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-read-all-data-router');
 var v1UnitPaymentOrderRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-router');
+let v1UnitPaymentOrderExpeditionReportRouter = require('../src/routers/v1/unit-payment-note/unit-payment-order-expedition-report-router');
 // BUDGET DEAL
 var v1BudgetDealPurchaseRequest = require('../src/routers/v1/generating-data/generating-data-purchase-request-router');
 var v1BudgetDealPurchaseOrderExternal = require('../src/routers/v1/generating-data/generating-data-purchase-order-external-router');
@@ -122,6 +123,7 @@ module.exports = function (server) {
     v1UnitPaymentOrderReadAllRouter().applyRoutes(server, "/unit-payment-orders/read-all");
     v1UnitPaymentOrderRouter().applyRoutes(server, "/unit-payment-orders");
     v1UnitReceiptNoteBasicRouter().applyRoutes(server,"/unit-receipt-notes-basic")
+    v1UnitPaymentOrderExpeditionReportRouter().applyRoutes(server, '/unit-payment-orders-expedition-report');
     //BUDGET DEAL
     v1BudgetDealPurchaseRequest().applyRoutes(server, "/generating-data/purchase-request");
     v1BudgetDealPurchaseOrderExternal().applyRoutes(server, "/generating-data/purchase-order-external");
