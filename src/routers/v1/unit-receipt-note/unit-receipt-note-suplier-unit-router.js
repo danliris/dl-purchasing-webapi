@@ -52,6 +52,7 @@ function getRouter() {
             "items.purchaseOrder._id",
             "items.purchaseOrder.purchaseOrderExternal.no",
             "items.purchaseOrder.purchaseOrderExternal._id",
+            "items.purchaseOrder.purchaseOrderExternal.paymentDueDays",
             "items.purchaseOrder.currency._id",
             "items.purchaseOrder.currency.symbol",
             "items.purchaseOrder.currency.code",
