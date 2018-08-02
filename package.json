@@ -41,6 +41,6 @@
     "supertest": "^2.0.0"
   },
   "directories": {
-    "test": "test"
+    "test": "test",
   }
 }
