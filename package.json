@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "6.9.2",
+    "node": "6.3.0",
     "npm": "3.10.10"
   },
   "repository": {
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/danliris/dl-purchasing-webapi#readme",
   "dependencies": {
     "assert": "^1.4.1",
-    "dl-module": "git+https://github.com/danliris/dl-module.git#dev",
+
+    "dl-module": "git+https://github.com/danliris/dl-module.git#uat",
     "json2xls": "^0.1.2",
     "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",
     "moment": "2.16.0",
