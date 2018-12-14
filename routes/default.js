@@ -27,6 +27,7 @@ var v1PurchaseOrderExternalRouter = require('../src/routers/v1/purchase-order-ex
 var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-cancel-router');
 var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-unpost-router');
 var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
+var v1PurchaseOrderExternalsByCurrencyBySupplierRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-supplier-by-currency');
 // DELIVERY ORDER
 var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
 var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
@@ -100,6 +101,7 @@ module.exports = function (server) {
     v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders-externals");
+    v1PurchaseOrderExternalsByCurrencyBySupplierRouter().applyRoutes(server, "/purchase-orders/externals/by-currency");
     //DELIVERY ORDER
     v1DOMonitoringByUserRouter().applyRoutes(server, "/delivery-orders/monitoring/by-user");
     v1DOMonitoringRouter().applyRoutes(server, "/delivery-orders/monitoring");

@@ -24,7 +24,7 @@
   "dependencies": {
     "assert": "^1.4.1",
 
-    "dl-module": "git+https://github.com/danliris/dl-module.git#uat",
+    "dl-module": "git+https://github.com/danliris/dl-module.git#dev",
     "json2xls": "^0.1.2",
     "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",
     "moment": "2.16.0",

@@ -26,7 +26,7 @@ function getJWTRouter(ManagerType, opts) {
     router.get("/", passport, function(request, response, next) {
         var user = request.user;
         var query = request.query;
-
+        user.token = request.headers.authorization;
         query.filter = Object.assign({}, query.filter, typeof defaultFilter === "function" ? defaultFilter(request, response, next) : defaultFilter, query.filter);
         query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order);
         query.select = query.select ? query.select : typeof defaultSelect === "function" ? defaultSelect(request, response, next) : defaultSelect;
@@ -57,7 +57,7 @@ function getJWTRouter(ManagerType, opts) {
     router.get("/:id", passport, (request, response, next) => {
         var user = request.user;
         var id = request.params.id;
-
+        user.token = request.headers.authorization;
         getManager(user)
             .then((manager) => {
                 return manager.getSingleByIdOrDefault(id);
@@ -87,7 +87,7 @@ function getJWTRouter(ManagerType, opts) {
     router.post("/", passport, (request, response, next) => {
         var user = request.user;
         var data = request.body;
-
+        user.token = request.headers.authorization;
         getManager(user)
             .then((manager) => {
                 return manager.create(data);
@@ -113,6 +113,7 @@ function getJWTRouter(ManagerType, opts) {
         var user = request.user;
         var id = request.params.id;
         var data = request.body;
+        user.token = request.headers.authorization;
 
         getManager(user)
             .then((manager) => {
@@ -146,8 +147,8 @@ function getJWTRouter(ManagerType, opts) {
 
     router.del("/:id", passport, (request, response, next) => {
         var user = request.user;
+        user.token = request.headers.authorization;
         var id = request.params.id;
-
         getManager(user)
             .then((manager) => {
                 return manager.getSingleByIdOrDefault(id)
